@@ -2,10 +2,10 @@
 public class Test {
 
 	public static void main(String[] args) {
-		System.out.println(euclid(3, 1));
+		System.out.println(euclid4(3, 1));
 	}
 	
-	public static int euclid(int x, int y) {
+	public static int euclid4(int x, int y) {
 		if (x < y) {
 			int tmp = x;
 			x = y;
