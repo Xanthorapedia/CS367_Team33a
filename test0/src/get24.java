@@ -5,7 +5,7 @@ public class get24 {
 	public static void main(String [] arg) {
 		System.out.println("we are awesome");
 		get24 a = new get24();
-		a.find(new float[] {7,7,5,12});
+		a.find(new float[] {7,7,5,11});
 	}
 	
 	public void find(float[] numbers) {
