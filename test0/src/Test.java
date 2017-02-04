@@ -2,7 +2,7 @@
 public class Test {
 
 	public static void main(String[] args) {
-		System.out.println(euclid(6, 4));
+		System.out.println(euclid(64, 48));
 	}
 	
 	public static int euclid(int x, int y) {
