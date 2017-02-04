@@ -1,2 +1,2 @@
-# CS367_Programs
-No Description
+# Go Team 33!
+Have fun with 367 programs!
