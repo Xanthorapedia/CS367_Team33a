@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 public class get24 {
 	private ArrayList<String> buf = new ArrayList<String>();
 	private int count = 0;
