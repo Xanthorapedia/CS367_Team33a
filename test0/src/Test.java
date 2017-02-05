@@ -3,6 +3,5 @@ public class Test {
 		System.out.println("??");
 		System.out.println("KJ!");
 		System.out.println("236");
-		System.out.println("234");
 	}
 }
