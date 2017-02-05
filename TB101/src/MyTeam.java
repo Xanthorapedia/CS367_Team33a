@@ -10,6 +10,7 @@ public class MyTeam {
 //	Sam 				sruh@wisc.edu		4
 //	bobby				zlv7@wisc.edu		1
 //	apoorva				dhawan3@wisc.edu    1
+//	meredith				
 //
 //
 //  3. What is the sum of years of programming (in any language) of your team members? 
@@ -55,7 +56,7 @@ public class MyTeam {
 //
 //  7. Can you find any positive integer values that meet the 
 //     pre-conditions, but fail your method at run-time?  If so, what are they?
-//     FAILS FOR:      x =               y =                  z = 
+//     FAILS FOR:      x = 2^31  -2       y =  2^31  -2           z = 2^31 -1
 	public static void main (String [] args){
 		System.out.println(sumOfMultiples(1,1,100));
 	}
