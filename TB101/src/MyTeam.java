@@ -1,4 +1,4 @@
-package p0;
+
 
 public class MyTeam {
 //  1. Work together to decide upon a team nickname.  What is your team's nick name? 
