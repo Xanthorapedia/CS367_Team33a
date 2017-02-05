@@ -10,10 +10,7 @@ public class MyTeam {
 //	Sam 				sruh@wisc.edu		4
 //	bobby				zlv7@wisc.edu		1
 //	apoorva				dhawan3@wisc.edu    1
-<<<<<<< HEAD
 //	meredith			ylou9@wisc.edu		
-=======
->>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33
 //
 //
 //  3. What is the sum of years of programming (in any language) of your team members? 
@@ -54,7 +51,7 @@ public class MyTeam {
 //  6. Include at least 3 other examples of calling your method to compute
 //     such a sum.  
 //		x = 3, y = 10, z = 100 Answer: 180
-//		x = 3, y = 5, z = 100 Answer: 315
+//		x = 3, y = 5, z = 100 Answer: 315 
 //		x = 3, y = 4, z = 100 Answer: 432
 //
 //  7. Can you find any positive integer values that meet the 
