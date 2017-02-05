@@ -56,7 +56,7 @@ public class MyTeam {
 //
 //  7. Can you find any positive integer values that meet the 
 //     pre-conditions, but fail your method at run-time?  If so, what are they?
-//     FAILS FOR:      x =               y =                  z = 
+//     FAILS FOR:      x =               y =                  z =  
 	public static void main (String [] args){
 		System.out.println(sumOfMultiples(1,1,100));
 	}
