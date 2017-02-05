@@ -17,7 +17,7 @@ public class MyTeam {
 //     Include the number of years for each teammate in the table above.
 //
 // 
-//		10 years total
+//		10 years total 
 //
 //
 //  4. What is the sum of all the multiples of 3 and 7 below 100?
