@@ -1,5 +1,5 @@
 +1s This is the data file for cs302 OfflineJudge +1s
-***CONFIG SELECTED_INDICES = 0. AUTO_RUN =FALSE.
+***CONFIG SELECTED_INDICES = 1. AUTO_RUN =FALSE.
 
 ***INPUT  0
 lll
@@ -7,6 +7,56 @@ lll
 
 
 ***OUTPUT 0
+false
+***END
+////////////////////////////////////////////////////////////
+
+***INPUT  1
+1232134
+***END
+
+
+***OUTPUT 1
+true
+***END
+////////////////////////////////////////////////////////////
+
+***INPUT  2
+lll
+***END
+
+
+***OUTPUT 2
+false
+***END
+////////////////////////////////////////////////////////////
+
+***INPUT  3
+lll
+***END
+
+
+***OUTPUT 3
+false
+***END
+////////////////////////////////////////////////////////////
+
+***INPUT  4
+lll
+***END
+
+
+***OUTPUT 4
+false
+***END
+////////////////////////////////////////////////////////////
+
+***INPUT  5
+lll
+***END
+
+
+***OUTPUT 5
 false
 ***END
 ////////////////////////////////////////////////////////////
