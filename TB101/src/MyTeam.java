@@ -10,7 +10,7 @@ public class MyTeam {
 //	Sam 				sruh@wisc.edu		4
 //	bobby				zlv7@wisc.edu		1
 //	apoorva				dhawan3@wisc.edu    1
-//	meredith				
+//	meredith			ylou9@wisc.edu		
 //
 //
 //  3. What is the sum of years of programming (in any language) of your team members? 
