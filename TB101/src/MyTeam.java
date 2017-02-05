@@ -51,7 +51,7 @@ public class MyTeam {
 //  6. Include at least 3 other examples of calling your method to compute
 //     such a sum.  
 //		x = 3, y = 10, z = 100 Answer: 180
-//		x = 3, y = 5, z = 100 Answer: 315
+//		x = 3, y = 5, z = 100 Answer: 315 
 //		x = 3, y = 4, z = 100 Answer: 432
 //
 //  7. Can you find any positive integer values that meet the 
