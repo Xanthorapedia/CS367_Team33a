@@ -64,9 +64,8 @@ public class TestParse {
 		String[] categories = null;
 		int[] weights = null;
 		
-		// regex matching pattern and matcher
+		// regex matching pattern
 		Pattern pattern = null;
-		Matcher matcher = null;
 		
 		// Line count
 		int i = 0;
@@ -81,11 +80,9 @@ public class TestParse {
 			// parse assignments: category(num) pEarned pPossible (#comment)
 			else
 				pattern = PTRN_ASGNS;
-			// get matcher
-			matcher = pattern.matcher(tmp);
 			
 			// if matches, split to get info; if no match, bad file
-			if (matcher.matches()) {
+			if (pattern.matcher(tmp).matches()) {
 				String[] splitStrings = PTRN_SPLIT.split(tmp);
 				// grades line
 				if (i == 0)
