@@ -44,18 +44,24 @@ public class TestParse {
 	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
 	 */
 	public static void checkFile(String path) throws FileNotFoundException, Exception {
-		final String PATTERN_SPLIT = "\\s+|(#.*)+";
-		// file input
+		// Patterns used for splitting and checking for formats
+		final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
+		final Pattern PTRN_WORDS = 
+				Pattern.compile("\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
+		final Pattern PTRN_NUMBS = 
+				Pattern.compile("\\s*\\d+(\\s+\\d+)*\\s*(#.*)*");
+		final Pattern PTRN_ASGNS = 
+				Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+){2}\\s*(#.*)*");
+		
+		// file input and current line
 		Scanner stdIn = new Scanner(new File(path));
-		// current line
 		String tmp = null;
-		// all grade letters
+		
+		// all grade letters, corresponding thresholds, 
+		// category of assignments and corresponding weights
 		String[] grades = null;
-		// corresponding thresholds
 		int[] thresholds = null;
-		// category of assignments
 		String[] categories = null;
-		// corresponding weights
 		int[] weights = null;
 		
 		// regex matching pattern and matcher
@@ -66,27 +72,26 @@ public class TestParse {
 		int i = 0;
 		while (stdIn.hasNextLine()) {
 			tmp = stdIn.nextLine();
-			// parse words: grade1 ( grade2 grade3...) (#comment)
+			// parse words: word0 ( word1 word2...) (#comment)
 			if (i == 0 || i == 2)
-				pattern = Pattern.compile("[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
-			// parse numbers: num1 ( num2 num3...) (#comment)
+				pattern = PTRN_WORDS;
+			// parse numbers: num0 ( num1 num2...) (#comment)
 			else if (i == 1 || i == 3)
-				pattern = Pattern.compile("\\d+(\\s+\\d+)*\\s*(#.*)*");
+				pattern = PTRN_NUMBS;
 			// parse assignments: category(num) pEarned pPossible (#comment)
 			else
-				pattern = Pattern.compile("[a-zA-Z]\\d*(\\s+\\d+){2}\\s*(#.*)*");
+				pattern = PTRN_ASGNS;
 			// get matcher
 			matcher = pattern.matcher(tmp);
 			
 			// if matches, split to get info; if no match, bad file
 			if (matcher.matches()) {
-				String[] splitStrings = tmp.split(PATTERN_SPLIT);
+				String[] splitStrings = PTRN_SPLIT.split(tmp);
 				// grades line
 				if (i == 0)
 					grades = splitStrings;
-				// thresholds line
+				// thresholds line, parse thresholds and put into int[]
 				else if (i == 1) {
-					// parse thresholds and put into int[]
 					thresholds = new int[splitStrings.length];
 					for (int j = 0; j < splitStrings.length; j++)
 						thresholds[j] = Integer.parseInt(splitStrings[j]);
@@ -94,9 +99,8 @@ public class TestParse {
 				// categories line
 				else if (i == 2)
 					categories = splitStrings;
-				// weights line
+				// weights line, parse thresholds and put into int[]
 				else if (i == 3) {
-					// parse thresholds and put into int[]
 					weights = new int[splitStrings.length];
 					for (int j = 0; j < splitStrings.length; j++)
 						weights[j] = Integer.parseInt(splitStrings[j]);
