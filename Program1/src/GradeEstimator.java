@@ -72,7 +72,7 @@ public class GradeEstimator {
 	}
 
 
-	public static String getEstimateReport(){
+	public String getEstimateReport(){
 		String estimateReport;
 		// initial individual percentages
 		double homeworkScore = 0;	
@@ -89,13 +89,15 @@ public class GradeEstimator {
 		
 		
 		while (scoreiterator.hasNext()) {
-			estimateReport = scoreiterator.categoryNames + "   " + scoreiterator.miniThresholds + "\n";
-			}
-			estimateReport += "Grades estimate is based on " + scorelist.size + " scores\n";
+			Score score = scoreiterator.next();
+			estimateReport = score.getName() + "   " + score.getPoints() + "\n";
+		}
+			estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 			
 			
 			while(scoreiterator.hasNext()){
-				if(scoreiterator.categoryName.charAt(0).equals("h") || 
+				Score score = scoreiterator.next();
+				if(score.getCategory().equals("h") || 
 						scoreiterator.categoryName.charAt(0).equals("H")){
 					//homeworkScore += scoreiterator.miniThreshholds
 				}
