@@ -93,10 +93,9 @@ public class GradeEstimator {
 	 * @throws FileNotFoundException - if file is not found
 	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
 	 */
-	private static ScoreList parseFile(String path) 
+	private ScoreList parseFile(Scanner stdIn) 
 			throws FileNotFoundException, GradeFileFormatException {
 		// file input and current line
-		Scanner stdIn = new Scanner(new File(path));
 		String tmp = null;
 		
 		// all grade letters, corresponding thresholds, 
