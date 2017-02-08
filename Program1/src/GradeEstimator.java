@@ -29,14 +29,13 @@ public class GradeEstimator {
 			categoryWeights = Config.CATEGORY_WEIGHT;
 			
 		}else{
-			for (String i: args)
+			for (String i: args){
 				try{
 			
 					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(i);
 					System.out.println(getEstimateReport());
 			
 				}catch(FileNotFoundException e){
-					throw new FileNotFoundException();
 
 				}catch(GradeFileFormatException e){
 			
@@ -60,6 +59,9 @@ public class GradeEstimator {
 		catch(GradeFileFormatException e){
 			
 
+		}
+		finally{
+			return null;
 		}
 	}
 
