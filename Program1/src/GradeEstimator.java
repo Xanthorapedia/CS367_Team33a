@@ -23,14 +23,12 @@ public class GradeEstimator {
 	private ScoreList scores;
 	
 	public static void main(String[] args) {
-		if (args.length == 0){
+		if (args.length == 0) {
 			System.out.println(Config.USAGE_MESSAGE);
-			letterGrades = Config.GRADE_LETTER;
-			miniThresholds = Config.GRADE_THRESHOLD;
-			categoryNames = Config.CATEGORY_KEY;
-			categoryWeights = Config.CATEGORY_WEIGHT;
+			GradeEstimator(Config.GRADE_LETTER, Config.GRADE_THRESHOLD, Config.CATEGORY_KEY, Config.CATEGORY_WEIGHT, null);
 			
-		}else{
+		}
+		else {
 			for (String file: args)
 				try{
 			
@@ -47,16 +45,12 @@ public class GradeEstimator {
 	
 	public GradeEstimator(String[] letterGrades, double[] miniThresholds, String[] categoryNames,
 			double[] categoryWeights, ScoreList scores) {
-		super();
 		this.letterGrades = letterGrades;
 		this.miniThresholds = miniThresholds;
 		this.categoryNames = categoryNames;
 		this.categoryWeights = categoryWeights;
 		this.scores = scores;
 	}
-
-
-
 
 	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
 
