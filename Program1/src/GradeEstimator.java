@@ -187,7 +187,7 @@ public class GradeEstimator {
 		
 		
 		stdIn.close();
-		return null;
+		return list;
 	}
 
 }
