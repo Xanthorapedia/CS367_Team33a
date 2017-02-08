@@ -72,7 +72,7 @@ public class GradeEstimator {
 
 
 	public String getEstimateReport(){
-		String estimateReport;
+		String estimateReport = null;
 		// initial individual percentages
 		double homeworkScore = 0;	
 		double programScore = 0;
@@ -86,38 +86,29 @@ public class GradeEstimator {
 		// final weighted percent
 		double weightedPercent = 0;
 		
-		for (int i = 0; i < scores.size(); i ++) {
+		for (int i = 0; i < scores.size(); i++) {
 			Score score = scores.get(i);
 			estimateReport = score.getName() + "   " + String.format("%5.2f",score.getPoints()) + "\n";
 		}
 		
 		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 		
-		for (String cat : categoryNames) {
+		for (int i = 0; i < scores.size(); i++) {
+			String cat = categoryNames[i];
 			ScoreIterator scoreiterator = new ScoreIterator(scores, cat);
-			double percents = 0;
+			double percent = 0;
 			int count = 0;
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
-				percents += score.getPercent();
+				percent += score.getPercent();
 			}
 			if (count != 0)
-				percents /= count;
-			
+				percent /= count;
+			estimateReport += "  " + String.format("%7.2f", percent/*//TODO: not correct*/) + "% = " +  String.format("%2.0f",categoryWeights[i]) + "% of " + cat
+					+ "% for "+ cat + "\n";
 		}
-			// calculate weighted grades here
-			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%2.0f",homeworkScore) + "% of " + scoreiterator.miniThreshold
-					+ "% for homework" + "\n";
 			
-			estimateReport += "  " +  String.format("%7.2f",wp) + "% = " +  String.format("%2.0f",programScore) + "% of " + scoreiterator.miniThreshold
-					+ "% for program" + "\n";
-			
-			estimateReport += "  " +  String.format("%7.2f",wm) + "% = " +  String.format("%2.of",midtermScore) + "% of " + scoreiterator.miniThreshold
-					+ "% for midterm" + "\n";
-			
-			estimateReport += "  " +  String.format("%7.2f",wf) + "% = " +  String.format("%2.0f",finalScore) + "% of " + scoreiterator.miniThreshold
-					+ "% for final" + "\n";
-			
+			// TODO : else
 			estimateReport += "--------------------------------";
 			
 			weightedPercent = wf + wm + wp + wh;
