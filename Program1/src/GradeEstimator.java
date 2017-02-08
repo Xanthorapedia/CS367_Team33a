@@ -90,7 +90,7 @@ public class GradeEstimator {
 		
 		while (scoreiterator.hasNext()) {
 			Score score = scoreiterator.next();
-			estimateReport = score.getName() + "   " + score.getPoints() + "\n";
+			estimateReport = score.getName() + "   " + String.format("%5.2f",score.getPoints()) + "\n";
 		}
 			estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 			
@@ -116,16 +116,16 @@ public class GradeEstimator {
 				
 			}
 			// calculate weighted grades here
-			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%5.2f",homeworkScore) + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%2.0f",homeworkScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for homework" + "\n";
 			
-			estimateReport += "  " +  String.format("%7.2f",wp) + "% = " +  String.format("%5.2f",programScore) + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wp) + "% = " +  String.format("%2.0f",programScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for program" + "\n";
 			
-			estimateReport += "  " +  String.format("%7.2f",wm) + "% = " +  String.format("%5.2f",midtermScore) + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wm) + "% = " +  String.format("%2.of",midtermScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for midterm" + "\n";
 			
-			estimateReport += "  " +  String.format("%7.2f",wf) + "% = " +  String.format("%5.2f",finalScore) + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wf) + "% = " +  String.format("%2.0f",finalScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for final" + "\n";
 			
 			estimateReport += "--------------------------------";
