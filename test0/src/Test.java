@@ -4,7 +4,6 @@ public class Test {
 		System.out.println("KJ!");
 		System.out.println("23");
 		
-<<<<<<< HEAD
 		System.out.println("Hello");
 =======
 		System.out.println("Df");

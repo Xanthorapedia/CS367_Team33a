@@ -15,6 +15,15 @@
  * list can be made. 
  *
  * @author Sam Ruh	
+=======
+
+/**
+ * This class will store and keep track of a list of scores. It can get,
+ * remove, and add scores. It is an instantiable class so more than one 
+ * list can be made. 
+ *
+ * @author 
+>>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33
  */
 public class ScoreList implements ScoreListADT {
 	//an array to store all of the score objects

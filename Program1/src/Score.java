@@ -15,6 +15,15 @@
  *
  *
  * @author Sam Ruh	
+=======
+
+/**
+ * This class is an instantiable class for holding test results. It has three
+ * fields it will be storing for each instance of this class that is created.
+ *
+ *
+ * @author 	
+>>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33
  */
 public class Score {
 	private String name; //the name of the student 
