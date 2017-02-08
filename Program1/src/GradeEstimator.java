@@ -7,93 +7,77 @@ import java.util.regex.Pattern;
 
 public class GradeEstimator {
 	// Patterns used for splitting and checking for formats
-	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
+	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|,|(#.*)+");
 	private static final Pattern PTRN_WORDS = 
-			Pattern.compile("\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
+			Pattern.compile("\\s*[a-zA-Z]+((\\s+|,)[a-zA-Z]+)*\\s*(#.*)*");
 	private static final Pattern PTRN_NUMBS = 
-			Pattern.compile("\\s*\\d+(\\s+\\d+)*\\s*(#.*)*");
+			Pattern.compile("\\s*\\d+(.\\d+)*((\\s+|,)\\d+(.\\d+)*)*\\s*(#.*)*");
 	private static final Pattern PTRN_ASGNS = 
-			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+){2}\\s*(#.*)*");
+			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+(.\\d+)*){2}\\s*(#.*)*");
 	
 	private String [] letterGrades;
 	private double [] miniThresholds; 
 	private String [] categoryNames;
 	private double [] categoryWeights;
 	
-	private ScoreList scores;
+	private ScoreList scores = new ScoreList();
 	
 	public static void main(String[] args) {
+		
+		GradeEstimator est = new GradeEstimator();
+		// if no args, create default report
 		if (args.length == 0) {
 			System.out.println(Config.USAGE_MESSAGE);
-			
-			GradeEstimator defaultGrade = null;
 			try {
-				defaultGrade = new GradeEstimator(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+				est.parse(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+				System.out.println(est.getEstimateReport());
 			} catch (GradeFileFormatException e) {
 				// Not gonna happen
 				e.printStackTrace();
 			}
-			System.out.println(defaultGrade.getEstimateReport());
 		}
 		else {
-			for (String file: args)
-				try{
-			
-					GradeEstimator thisGradeEstimator = 
-							createGradeEstimatorFromFile(file);
-					System.out.println(thisGradeEstimator.getEstimateReport());
-			
-				}catch(FileNotFoundException e){
-
-				}catch(GradeFileFormatException e){
-			
+				// for each file, create report
+				for (String file: args) {
+					try{
+						est = createGradeEstimatorFromFile(file);
+					}catch(FileNotFoundException e){
+						System.out.println("FNF");
+						//TODO gracefully exit
+						return;
+					}catch(GradeFileFormatException e){
+						System.out.println("GFF");
+						//e.printStackTrace();
+						//TODO gracefully exit
+						return;
+					}
 				}
+				System.out.println(est.getEstimateReport());
 			}
 	}
 	
-	private GradeEstimator(Scanner stdIn) throws GradeFileFormatException {
-		parse(stdIn);
-	}
 
 	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
-		
-
-		try{
-			return new GradeEstimator(new Scanner(new File(gradeInfo)));
-
-		}catch(FileNotFoundException e){
-			return null;
-
-		}
-		catch(GradeFileFormatException e){
-			return null;
-		}
+		Scanner stdIn = new Scanner(new File(gradeInfo));
+		GradeEstimator ge = new GradeEstimator();
+		ge.parse(stdIn);
+		return ge;
 	}
 
 
 	public String getEstimateReport(){
-		String estimateReport = null;
-		// initial individual percentages
-		double homeworkScore = 0;	
-		double programScore = 0;
-		double midtermScore = 0;
-		double finalScore = 0;
-		// weighted individual scores
-		double wh = 0;
-		double wp = 0;
-		double wm = 0;
-		double wf = 0;
+		String estimateReport = "";
 		// final weighted percent
 		double weightedPercent = 0;
 		
 		for (int i = 0; i < scores.size(); i++) {
 			Score score = scores.get(i);
-			estimateReport = score.getName() + "   " + String.format("%5.2f",score.getPoints()) + "\n";
+			estimateReport += score.getName() + "  " + String.format("%5.2f", score.getPercent()) + "\n";
 		}
 		
 		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 		
-		for (int i = 0; i < scores.size(); i++) {
+		for (int i = 0; i < categoryNames.length; i++) {
 			String cat = categoryNames[i];
 			ScoreIterator scoreiterator = new ScoreIterator(scores, cat);
 			double percent = 0;
@@ -101,21 +85,28 @@ public class GradeEstimator {
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
 				percent += score.getPercent();
+				count++;
 			}
 			if (count != 0)
 				percent /= count;
-			estimateReport += "  " + String.format("%7.2f", percent/*//TODO: not correct*/) + "% = " +  String.format("%2.0f",categoryWeights[i]) + "% of " + cat
-					+ "% for "+ cat + "\n";
+			
+			double weight = categoryWeights[i] / 100;
+			estimateReport += String.format("%7.2f", weight * percent) + "% = " + 
+					String.format("%5.2f", percent) + "% of " + 
+					String.format("%2.0f", categoryWeights[i]) + "% for "
+					+ cat + "\n";
+			weightedPercent += weight * percent;
 		}
+			estimateReport += "--------------------------------\n";
 			
-			// TODO : else
-			estimateReport += "--------------------------------";
+			estimateReport += String.format("%7.2f",weightedPercent) + "% weighted percent\n";
+			estimateReport += "Letter Grade Estimate: ";
 			
-			weightedPercent = wf + wm + wp + wh;
-			
-			estimateReport += "  " +  String.format("%7.2f",weightedPercent) + "% weighted percent";
-			estimateReport += "Letter Grade Estimate: "; // FIXME put letter grade here
-			
+			for (int i = 0; i < miniThresholds.length; i++)
+				if (weightedPercent > miniThresholds[i]) {
+					estimateReport += letterGrades[i];
+					break;
+				}
 			   
 			return estimateReport;
 
@@ -146,10 +137,10 @@ public class GradeEstimator {
 		
 		// all grade letters, corresponding thresholds, 
 		// category of assignments and corresponding weights
-		String[] grades = letterGrades;
-		double[] thresholds = miniThresholds;
-		String[] categories = categoryNames;
-		double[] weights = categoryWeights;
+		String[] grades = null;
+		double[] thresholds = null;
+		String[] categories = null;
+		double[] weights = null;
 		
 		// regex matching pattern
 		Pattern pattern = null;
@@ -180,7 +171,7 @@ public class GradeEstimator {
 				else if (i == 1) {
 					thresholds = new double[splitStrings.length];
 					for (int j = 0; j < splitStrings.length; j++)
-						thresholds[j] = Integer.parseInt(splitStrings[j]);
+						thresholds[j] = Double.parseDouble(splitStrings[j]);
 				}
 				// categories line
 				else if (i == 2)
@@ -231,6 +222,10 @@ public class GradeEstimator {
 		if (sum != 100)
 			throw new GradeFileFormatException("Bad Weights: sum = " + sum);
 		
+		letterGrades = grades;
+		miniThresholds = thresholds;
+		categoryNames = categories;
+		categoryWeights = weights;
 		
 		stdIn.close();
 	}

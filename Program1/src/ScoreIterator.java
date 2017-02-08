@@ -1,5 +1,4 @@
 
-
 import java.util.*;
 public class ScoreIterator implements ScoreIteratorADT{
 	private ScoreList myScores;
@@ -13,13 +12,17 @@ public class ScoreIterator implements ScoreIteratorADT{
 	}
 	
 	public boolean hasNext(){
-		return currPos > myScores.size();
+		// while not find the assignment with the correct category, goto next
+		while (currPos < myScores.size() && 
+				!myScores.get(currPos).getCategory()
+				.equals(category.substring(0, 1)))
+			currPos++;
+		return currPos < myScores.size();
 	}
 	
 	public Score next(){
-		if (!hasNext()) throw new NoSuchElementException();
-		Score result = myScores.get(currPos);
-		currPos ++;
-		return result;
+		if (!hasNext())
+			throw new NoSuchElementException();
+		return myScores.get(currPos++);
 	}
 }
