@@ -88,7 +88,7 @@ public class GradeEstimator {
 		
 		while (scoreiterator.hasNext()) {
 			Score score = scoreiterator.next();
-			estimateReport = score.getName() + "   " + score.getPoints() + "\n";
+			estimateReport = score.getName() + "   " + String.format("%5.2f",score.getPoints()) + "\n";
 		}
 		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 		
@@ -112,28 +112,28 @@ public class GradeEstimator {
 				if(scoreiterator.categoryName.charAt(0).equals("f") || 
 						scoreiterator.categoryName.charAt(0).equals("F")){
 					// find final scores
-				}
+				} 
 				
 			}
 		}
 			// calculate weighted grades here
-			estimateReport += "  " + wh + "% = " + homeworkScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%2.0f",homeworkScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for homework" + "\n";
 			
-			estimateReport += "  " + wp + "% = " + programScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wp) + "% = " +  String.format("%2.0f",programScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for program" + "\n";
 			
-			estimateReport += "  " + wm + "% = " + midtermScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wm) + "% = " +  String.format("%2.of",midtermScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for midterm" + "\n";
 			
-			estimateReport += "  " + wf + "% = " + finalScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wf) + "% = " +  String.format("%2.0f",finalScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for final" + "\n";
 			
 			estimateReport += "--------------------------------";
 			
 			weightedPercent = wf + wm + wp + wh;
 			
-			estimateReport += "  " + weightedPercent + "% weighted percent";
+			estimateReport += "  " +  String.format("%7.2f",weightedPercent) + "% weighted percent";
 			estimateReport += "Letter Grade Estimate: "; // FIXME put letter grade here
 			
 			   
