@@ -38,7 +38,7 @@ public class GradeEstimator {
 			
 					GradeEstimator thisGradeEstimator = 
 							createGradeEstimatorFromFile(file);
-					System.out.println(getEstimateReport());
+					System.out.println(thisGradeEstimator.getEstimateReport());
 			
 				}catch(FileNotFoundException e){
 
