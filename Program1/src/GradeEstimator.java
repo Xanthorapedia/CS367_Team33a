@@ -26,7 +26,13 @@ public class GradeEstimator {
 		if (args.length == 0) {
 			System.out.println(Config.USAGE_MESSAGE);
 			
-			GradeEstimator defaultGrade = GradeEstimator(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+			GradeEstimator defaultGrade = null;
+			try {
+				defaultGrade = new GradeEstimator(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+			} catch (GradeFileFormatException e) {
+				// Not gonna happen
+				e.printStackTrace();
+			}
 			System.out.println(defaultGrade.getEstimateReport());
 		}
 		else {
@@ -53,8 +59,7 @@ public class GradeEstimator {
 		
 
 		try{
-			return new GradeEstimator(letterGrades,miniThresholds,
-					categoryNames,categoryWeights, parseFile(gradeInfo));
+			return new GradeEstimator(new Scanner(new File(gradeInfo)));
 
 		}catch(FileNotFoundException e){
 			return null;
