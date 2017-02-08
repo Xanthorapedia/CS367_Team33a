@@ -27,7 +27,7 @@
  */
 public class ScoreList implements ScoreListADT {
 	//an array to store all of the score objects
-	private Score[] list = new Score[100];
+	private Score[] list = new Score[1];
 	
 	//the number of scores in the array
 	private int numScores = 0;
@@ -62,8 +62,20 @@ public class ScoreList implements ScoreListADT {
 		if (s == null)
 			throw new IllegalArgumentException();
 		
-		list[numScores ++] = s;
+		if (numScores == list.length)
+			expandArray();
+		list[numScores] = s;
+		numScores++;
 	}
+	
+	private void expandArray() {
+		// TODO Auto-generated method stub
+		Score[] a = new Score[list.length * 2];
+		for (int i = 0; i < numScores; i++)
+			a[i] = list[i];
+		list = a;
+	}
+		
 	
 	/**
 	 * This method removes and returns the score object at the given location.
