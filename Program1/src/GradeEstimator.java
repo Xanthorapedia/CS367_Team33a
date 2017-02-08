@@ -15,10 +15,10 @@ public class GradeEstimator {
 	private static final Pattern PTRN_ASGNS = 
 			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+){2}\\s*(#.*)*");
 	
-	private static String [] letterGrades;
-	private static double [] miniThresholds; 
-	private static String [] categoryNames;
-	private static double [] categoryWeights;
+	private String [] letterGrades;
+	private double [] miniThresholds; 
+	private String [] categoryNames;
+	private double [] categoryWeights;
 	
 	private ScoreList scores;
 	
@@ -31,11 +31,7 @@ public class GradeEstimator {
 			categoryWeights = Config.CATEGORY_WEIGHT;
 			
 		}else{
-<<<<<<< HEAD
 			for (String file: args)
-=======
-			for (String i: args){
->>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33.git
 				try{
 			
 					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(file);
@@ -47,11 +43,19 @@ public class GradeEstimator {
 			
 				}
 			}
-		}
-<<<<<<< HEAD
-=======
 	}
->>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33.git
+	
+	public GradeEstimator(String[] letterGrades, double[] miniThresholds, String[] categoryNames,
+			double[] categoryWeights, ScoreList scores) {
+		super();
+		this.letterGrades = letterGrades;
+		this.miniThresholds = miniThresholds;
+		this.categoryNames = categoryNames;
+		this.categoryWeights = categoryWeights;
+		this.scores = scores;
+	}
+
+
 
 
 	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
@@ -98,7 +102,7 @@ public class GradeEstimator {
 	 * @throws FileNotFoundException - if file is not found
 	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
 	 */
-	public static ScoreList parseFile(String path) 
+	public ScoreList parseFile(String path) 
 			throws FileNotFoundException, GradeFileFormatException {
 		// file input and current line
 		Scanner stdIn = new Scanner(new File(path));
