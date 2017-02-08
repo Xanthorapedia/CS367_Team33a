@@ -112,7 +112,7 @@ public class GradeEstimator {
 				if(scoreiterator.categoryName.charAt(0).equals("f") || 
 						scoreiterator.categoryName.charAt(0).equals("F")){
 					// find final scores
-				}
+				} 
 				
 			}
 			// calculate weighted grades here
