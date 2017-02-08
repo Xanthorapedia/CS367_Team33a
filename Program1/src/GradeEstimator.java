@@ -26,10 +26,7 @@ public class GradeEstimator {
 		if (args.length == 0) {
 			System.out.println(Config.USAGE_MESSAGE);
 			
-			GradeEstimator defaultGrade = new GradeEstimator(Config.GRADE_LETTER, 
-					Config.GRADE_THRESHOLD, 
-					Config.CATEGORY_KEY, Config.CATEGORY_WEIGHT, 
-					new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+			GradeEstimator defaultGrade = GradeEstimator(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
 			System.out.println(defaultGrade.getEstimateReport());
 		}
 		else {
@@ -48,17 +45,12 @@ public class GradeEstimator {
 			}
 	}
 	
-	public GradeEstimator(String[] letterGrades, double[] miniThresholds, String[] categoryNames,
-			double[] categoryWeights, Scanner stdIn) throws GradeFileFormatException {
-		this.letterGrades = letterGrades;
-		this.miniThresholds = miniThresholds;
-		this.categoryNames = categoryNames;
-		this.categoryWeights = categoryWeights;
-		this.scores = this.parse(stdIn);
+	private GradeEstimator(Scanner stdIn) throws GradeFileFormatException {
+		parse(stdIn);
 	}
 
-	public GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
-
+	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
+		
 
 		try{
 			return new GradeEstimator(letterGrades,miniThresholds,
@@ -71,6 +63,7 @@ public class GradeEstimator {
 		catch(GradeFileFormatException e){
 			return null;
 		}
+		return null;
 	}
 
 
@@ -97,7 +90,7 @@ public class GradeEstimator {
 	 * @throws FileNotFoundException - if file is not found
 	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
 	 */
-	private ScoreList parse(Scanner stdIn) throws GradeFileFormatException {
+	private void parse(Scanner stdIn) throws GradeFileFormatException {
 		// file input and current line
 		String tmp = null;
 		
@@ -112,7 +105,6 @@ public class GradeEstimator {
 		Pattern pattern = null;
 		
 		// returned ScoreList
-		ScoreList list = new ScoreList();
 		
 		// Line count
 		int i = 0;
@@ -153,7 +145,7 @@ public class GradeEstimator {
 				else {
 					double earned = Double.parseDouble(splitStrings[1]);
 					double max = Double.parseDouble(splitStrings[2]);
-					list.add(new Score(splitStrings[0], earned, max));
+					scores.add(new Score(splitStrings[0], earned, max));
 				}
 			}
 			else {
@@ -191,7 +183,6 @@ public class GradeEstimator {
 		
 		
 		stdIn.close();
-		return list;
 	}
 
 }
