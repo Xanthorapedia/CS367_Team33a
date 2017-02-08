@@ -86,10 +86,11 @@ public class GradeEstimator {
 		// final weighted percent
 		double weightedPercent = 0;
 		
-		while (scoreiterator.hasNext()) {
-			Score score = scoreiterator.next();
+		for (int i = 0; i < scores.size(); i ++) {
+			Score score = scores.get(i);
 			estimateReport = score.getName() + "   " + String.format("%5.2f",score.getPoints()) + "\n";
 		}
+		
 		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
 		
 		for (String cat : categoryNames) {
