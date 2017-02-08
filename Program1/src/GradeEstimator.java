@@ -95,29 +95,15 @@ public class GradeEstimator {
 		
 		for (String cat : categoryNames) {
 			ScoreIterator scoreiterator = new ScoreIterator(scores, cat);
-			double points = 0;
+			double percents = 0;
 			int count = 0;
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
-				points += score.getPoints();
-				if(score.getCategory().equals("h") || 
-						scoreiterator.categoryName.charAt(0).equals("H")){
-					//homeworkScore += scoreiterator.miniThreshholds
-				}
-				if(scoreiterator.categoryName.charAt(0).equals("p") || 
-						scoreiterator.categoryName.charAt(0).equals("P")){
-						// find program scores	
-					}
-				if(scoreiterator.categoryName.charAt(0).equals("m") || 
-						scoreiterator.categoryName.charAt(0).equals("M")){
-					// find midterm scores
-				}
-				if(scoreiterator.categoryName.charAt(0).equals("f") || 
-						scoreiterator.categoryName.charAt(0).equals("F")){
-					// find final scores
-				} 
-				
+				percents += score.getPercent();
 			}
+			if (count != 0)
+				percents /= count;
+			
 		}
 			// calculate weighted grades here
 			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%2.0f",homeworkScore) + "% of " + scoreiterator.miniThreshold
