@@ -58,7 +58,7 @@ public class GradeEstimator {
 
 		try{
 			return new GradeEstimator(letterGrades,miniThresholds,
-					categoryNames,categoryWeights, parseFile(gradeInfo));
+					categoryNames,categoryWeights, parse(new Scanner(new File(gradeInfo))));
 
 		}catch(FileNotFoundException e){
 			return null;
