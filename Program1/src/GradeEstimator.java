@@ -32,7 +32,7 @@ public class GradeEstimator {
 			for (String file: args)
 				try{
 			
-					GradeEstimator thisGradeEstimater = 
+					GradeEstimator thisGradeEstimator = 
 							createGradeEstimatorFromFile(file);
 					System.out.println(getEstimateReport());
 			
