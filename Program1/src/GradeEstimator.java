@@ -114,23 +114,23 @@ public class GradeEstimator {
 				
 			}
 			// calculate weighted grades here
-			estimateReport += "  " + wh + "% = " + homeworkScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " + String.format("%7.2f",wh) + "% = " +  String.format("%5.2f",homeworkScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for homework" + "\n";
 			
-			estimateReport += "  " + wp + "% = " + programScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wp) + "% = " +  String.format("%5.2f",programScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for program" + "\n";
 			
-			estimateReport += "  " + wm + "% = " + midtermScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wm) + "% = " +  String.format("%5.2f",midtermScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for midterm" + "\n";
 			
-			estimateReport += "  " + wf + "% = " + finalScore + "% of " + scoreiterator.miniThreshold
+			estimateReport += "  " +  String.format("%7.2f",wf) + "% = " +  String.format("%5.2f",finalScore) + "% of " + scoreiterator.miniThreshold
 					+ "% for final" + "\n";
 			
 			estimateReport += "--------------------------------";
 			
 			weightedPercent = wf + wm + wp + wh;
 			
-			estimateReport += "  " + weightedPercent + "% weighted percent";
+			estimateReport += "  " +  String.format("%7.2f",weightedPercent) + "% weighted percent";
 			estimateReport += "Letter Grade Estimate: "; // FIXME put letter grade here
 			
 			   
