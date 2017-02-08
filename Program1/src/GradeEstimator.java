@@ -7,18 +7,20 @@ import java.util.regex.Pattern;
 
 public class GradeEstimator {
 	// Patterns used for splitting and checking for formats
-	public static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
-	public static final Pattern PTRN_WORDS = 
+	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
+	private static final Pattern PTRN_WORDS = 
 			Pattern.compile("\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
-	public static final Pattern PTRN_NUMBS = 
+	private static final Pattern PTRN_NUMBS = 
 			Pattern.compile("\\s*\\d+(\\s+\\d+)*\\s*(#.*)*");
-	public static final Pattern PTRN_ASGNS = 
+	private static final Pattern PTRN_ASGNS = 
 			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+){2}\\s*(#.*)*");
 	
-	public static String [] letterGrades;
-	public static double [] miniThresholds; 
-	public static String [] categoryNames;
-	public static double [] categoryWeights;
+	private static String [] letterGrades;
+	private static double [] miniThresholds; 
+	private static String [] categoryNames;
+	private static double [] categoryWeights;
+	
+	private ScoreList scores;
 	
 	public static void main(String[] args) {
 		if (args.length == 0){
@@ -28,10 +30,10 @@ public class GradeEstimator {
 			categoryNames = Config.CATEGORY_KEY;
 			categoryWeights = Config.CATEGORY_WEIGHT;
 		}else{
-			for (String i: args)
+			for (String file: args)
 				try{
 			
-					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(i);
+					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(file);
 					System.out.println(getEstimateReport());
 			
 				}catch(FileNotFoundException e){
@@ -42,9 +44,6 @@ public class GradeEstimator {
 				}
 			}
 		}
-		
-
-	}
 
 
 	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
