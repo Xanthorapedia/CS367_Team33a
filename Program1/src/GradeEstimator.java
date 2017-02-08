@@ -69,7 +69,6 @@ public class GradeEstimator {
 		catch(GradeFileFormatException e){
 			return null;
 		}
-		return null;
 	}
 
 
