@@ -21,6 +21,7 @@ public class GradeEstimator {
 	private double [] categoryWeights;
 	
 	private ScoreList scores;
+	private static ScoreIterator scoreiterator;
 	
 	public static void main(String[] args) {
 		if (args.length == 0){
@@ -80,8 +81,70 @@ public class GradeEstimator {
 
 
 	public static String getEstimateReport(){
-	    
-		return "";
+		String estimateReport;
+		// initial individual percentages
+		double homeworkScore = 0;	
+		double programScore = 0;
+		double midtermScore = 0;
+		double finalScore = 0;
+		// weighted individual scores
+		double wh = 0;
+		double wp = 0;
+		double wm = 0;
+		double wf = 0;
+		// final weighted percent
+		double weightedPercent = 0;
+		
+		
+		while (scoreiterator.hasNext()) {
+			estimateReport = scoreiterator.categoryNames + "   " + scoreiterator.miniThresholds + "\n";
+			}
+			estimateReport += "Grades estimate is based on " + scorelist.size + " scores\n";
+			
+			
+			while(scoreiterator.hasNext()){
+				if(scoreiterator.categoryName.charAt(0).equals("h") || 
+						scoreiterator.categoryName.charAt(0).equals("H")){
+					//homeworkScore += scoreiterator.miniThreshholds
+				}
+				if(scoreiterator.categoryName.charAt(0).equals("p") || 
+						scoreiterator.categoryName.charAt(0).equals("P")){
+						// find program scores	
+					}
+				if(scoreiterator.categoryName.charAt(0).equals("m") || 
+						scoreiterator.categoryName.charAt(0).equals("M")){
+					// find midterm scores
+				}
+				if(scoreiterator.categoryName.charAt(0).equals("f") || 
+						scoreiterator.categoryName.charAt(0).equals("F")){
+					// find final scores
+				}
+				
+			}
+			// calculate weighted grades here
+			estimateReport += "  " + wh + "% = " + homeworkScore + "% of " + scoreiterator.miniThreshold
+					+ "% for homework" + "\n";
+			
+			estimateReport += "  " + wp + "% = " + programScore + "% of " + scoreiterator.miniThreshold
+					+ "% for program" + "\n";
+			
+			estimateReport += "  " + wm + "% = " + midtermScore + "% of " + scoreiterator.miniThreshold
+					+ "% for midterm" + "\n";
+			
+			estimateReport += "  " + wf + "% = " + finalScore + "% of " + scoreiterator.miniThreshold
+					+ "% for final" + "\n";
+			
+			estimateReport += "--------------------------------";
+			
+			weightedPercent = wf + wm + wp + wh;
+			
+			estimateReport += "  " + weightedPercent + "% weighted percent";
+			estimateReport += "Letter Grade Estimate: "; // FIXME put letter grade here
+			
+			   
+			return estimateReport;
+
+		
 	
 	
 	}
