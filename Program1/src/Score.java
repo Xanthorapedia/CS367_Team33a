@@ -7,7 +7,7 @@
 // Author1: Sam Ruh, sruh@wisc.edu, ruh, lec 001
 //
 ////////////////////////////////////////////////////////////////////////////
-package p0;
+
 
 /**
  * This class is an instantiable class for holding test results. It has three

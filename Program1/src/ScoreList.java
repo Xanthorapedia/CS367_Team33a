@@ -7,7 +7,7 @@
 // Author1: Sam Ruh, sruh@wisc.edu, ruh, lec 001
 //
 ////////////////////////////////////////////////////////////////////////////
-package p0;
+
 
 /**
  * This class will store and keep track of a list of scores. It can get,
