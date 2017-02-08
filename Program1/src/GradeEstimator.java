@@ -27,6 +27,7 @@ public class GradeEstimator {
 			miniThresholds = Config.GRADE_THRESHOLD;
 			categoryNames = Config.CATEGORY_KEY;
 			categoryWeights = Config.CATEGORY_WEIGHT;
+			
 		}else{
 			for (String i: args)
 				try{
@@ -42,8 +43,6 @@ public class GradeEstimator {
 				}
 			}
 		}
-		
-
 	}
 
 
@@ -51,17 +50,7 @@ public class GradeEstimator {
 
 
 		try{
-			FileInputStream file = new FileInputStream("gradeInfo");
-			Scanner scan = new Scanner(file);
-			while(scan.hasNext()){
-				letterGrades = scan.nextLine().split(" "); 
-				
-			
-				
-				categoryNames = scan.nextLine().split(" ");
-			
-				      	
-			}
+			parseFile(gradeInfo);
 
 
 		}catch(FileNotFoundException e){
@@ -75,7 +64,7 @@ public class GradeEstimator {
 	}
 
 
-	public String getEstimateReport(){
+	public static String getEstimateReport(){
 	    
 		return "";
 	
