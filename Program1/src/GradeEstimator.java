@@ -29,38 +29,36 @@ public class GradeEstimator {
 			miniThresholds = Config.GRADE_THRESHOLD;
 			categoryNames = Config.CATEGORY_KEY;
 			categoryWeights = Config.CATEGORY_WEIGHT;
+			
 		}else{
+<<<<<<< HEAD
 			for (String file: args)
+=======
+			for (String i: args){
+>>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33.git
 				try{
 			
 					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(file);
 					System.out.println(getEstimateReport());
 			
 				}catch(FileNotFoundException e){
-					throw new FileNotFoundException();
 
 				}catch(GradeFileFormatException e){
 			
 				}
 			}
 		}
+<<<<<<< HEAD
+=======
+	}
+>>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33.git
 
 
 	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
 
 
 		try{
-			FileInputStream file = new FileInputStream("gradeInfo");
-			Scanner scan = new Scanner(file);
-			while(scan.hasNext()){
-				letterGrades = scan.nextLine().split(" "); 
-				
-			
-				
-				categoryNames = scan.nextLine().split(" ");
-			
-				      	
-			}
+			parseFile(gradeInfo);
 
 
 		}catch(FileNotFoundException e){
@@ -71,10 +69,13 @@ public class GradeEstimator {
 			
 
 		}
+		finally{
+			return null;
+		}
 	}
 
 
-	public String getEstimateReport(){
+	public static String getEstimateReport(){
 	    
 		return "";
 	
