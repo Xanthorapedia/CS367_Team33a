@@ -21,7 +21,6 @@ public class GradeEstimator {
 	private double [] categoryWeights;
 	
 	private ScoreList scores;
-	private static ScoreIterator scoreiterator;
 	
 	public static void main(String[] args) {
 		if (args.length == 0) {
@@ -87,13 +86,14 @@ public class GradeEstimator {
 		// final weighted percent
 		double weightedPercent = 0;
 		
-		
 		while (scoreiterator.hasNext()) {
 			Score score = scoreiterator.next();
 			estimateReport = score.getName() + "   " + score.getPoints() + "\n";
 		}
-			estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
-			
+		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
+		for (String cat : categoryNames) {
+			ScoreIterator scoreiterator = new ScoreIterator(scores, "h");
+		}
 			
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
