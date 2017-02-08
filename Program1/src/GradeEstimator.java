@@ -95,9 +95,11 @@ public class GradeEstimator {
 		
 		for (String cat : categoryNames) {
 			ScoreIterator scoreiterator = new ScoreIterator(scores, cat);
-			
+			double points = 0;
+			int count = 0;
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
+				points += score.getPoints();
 				if(score.getCategory().equals("h") || 
 						scoreiterator.categoryName.charAt(0).equals("H")){
 					//homeworkScore += scoreiterator.miniThreshholds
