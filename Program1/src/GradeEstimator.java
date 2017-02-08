@@ -34,7 +34,8 @@ public class GradeEstimator {
 			for (String file: args)
 				try{
 			
-					GradeEstimator thisGradeestimater = createGradeEstimatorFromFile(file);
+					GradeEstimator thisGradeEstimater = 
+							createGradeEstimatorFromFile(file);
 					System.out.println(getEstimateReport());
 			
 				}catch(FileNotFoundException e){
@@ -58,22 +59,18 @@ public class GradeEstimator {
 
 
 
-	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
+	public GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) throws FileNotFoundException, GradeFileFormatException{
 
 
 		try{
-			parseFile(gradeInfo);
-
+			return new GradeEstimator(letterGrades,miniThresholds,
+					categoryNames,categoryWeights, parseFile(gradeInfo));
 
 		}catch(FileNotFoundException e){
-			throw new FileNotFoundException();
+			return null;
 
 		}
 		catch(GradeFileFormatException e){
-			
-
-		}
-		finally{
 			return null;
 		}
 	}
@@ -102,7 +99,7 @@ public class GradeEstimator {
 	 * @throws FileNotFoundException - if file is not found
 	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
 	 */
-	public ScoreList parseFile(String path) 
+	private static ScoreList parseFile(String path) 
 			throws FileNotFoundException, GradeFileFormatException {
 		// file input and current line
 		Scanner stdIn = new Scanner(new File(path));
