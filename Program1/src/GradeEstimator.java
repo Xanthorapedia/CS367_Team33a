@@ -91,9 +91,9 @@ public class GradeEstimator {
 			estimateReport = score.getName() + "   " + score.getPoints() + "\n";
 		}
 		estimateReport += "Grades estimate is based on " + scores.size() + " scores\n";
+		
 		for (String cat : categoryNames) {
-			ScoreIterator scoreiterator = new ScoreIterator(scores, "h");
-		}
+			ScoreIterator scoreiterator = new ScoreIterator(scores, cat);
 			
 			while(scoreiterator.hasNext()){
 				Score score = scoreiterator.next();
@@ -115,6 +115,7 @@ public class GradeEstimator {
 				}
 				
 			}
+		}
 			// calculate weighted grades here
 			estimateReport += "  " + wh + "% = " + homeworkScore + "% of " + scoreiterator.miniThreshold
 					+ "% for homework" + "\n";
