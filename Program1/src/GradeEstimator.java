@@ -59,7 +59,12 @@ public class GradeEstimator {
 		
 
 		try{
+<<<<<<< HEAD
 			return new GradeEstimator(new Scanner(new File(gradeInfo)));
+=======
+			return new GradeEstimator(letterGrades,miniThresholds,
+					categoryNames,categoryWeights, new Scanner(new File(gradeInfo)));
+>>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33.git
 
 		}catch(FileNotFoundException e){
 			return null;
