@@ -13,17 +13,6 @@
  * This class will store and keep track of a list of scores. It can get,
  * remove, and add scores. It is an instantiable class so more than one 
  * list can be made. 
- *
- * @author Sam Ruh	
-=======
-
-/**
- * This class will store and keep track of a list of scores. It can get,
- * remove, and add scores. It is an instantiable class so more than one 
- * list can be made. 
- *
- * @author 
->>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33
  */
 public class ScoreList implements ScoreListADT {
 	//an array to store all of the score objects
@@ -41,7 +30,7 @@ public class ScoreList implements ScoreListADT {
 	 *
 	 * @return the number of items in the list
 	 */
-	public int size(){
+	public int size() {
 		return numScores;
 	}
 	
@@ -56,7 +45,7 @@ public class ScoreList implements ScoreListADT {
 	 *
 	 * @param s a new score object to be added to the list of score objects
 	 */
-	public void add(Score s) throws IllegalArgumentException{
+	public void add(Score s) throws IllegalArgumentException {
 		/*checks to make sure the given score object is not null so the
 		 *  ScoreList class follows ADT rules and is contiguous*/
 		if (s == null)
@@ -69,7 +58,6 @@ public class ScoreList implements ScoreListADT {
 	}
 	
 	private void expandArray() {
-		// TODO Auto-generated method stub
 		Score[] a = new Score[list.length * 2];
 		for (int i = 0; i < numScores; i++)
 			a[i] = list[i];
@@ -87,7 +75,7 @@ public class ScoreList implements ScoreListADT {
 	 * @param i is an index for a given score object in the list 
 	 * @return the score object at the given index
 	 */
-	public Score remove(int i) throws IndexOutOfBoundsException{
+	public Score remove(int i) throws IndexOutOfBoundsException {
 		//checks to make sure the given index is in bounds
 		if (i < 0 || i > numScores)
 			throw new IndexOutOfBoundsException();
@@ -97,7 +85,7 @@ public class ScoreList implements ScoreListADT {
 		//shifts all the objects to the right of the requested object to the
 		//left one space to effectively 'delete' the requested object
 		for (int index = i; index < numScores - 1; index++) {
-	        list[index] = list[index+1];
+	        list[index] = list[index + 1];
 	    }
 		
 		numScores --;
@@ -114,7 +102,7 @@ public class ScoreList implements ScoreListADT {
 	 * @param i is an index for a given score object in the list 
 	 * @return the score object at the given index
 	 */
-	public Score get(int i) throws IndexOutOfBoundsException{
+	public Score get(int i) throws IndexOutOfBoundsException {
 		//checks to make sure the given index is in bounds
 		if (i < 0 || i > numScores)
 			throw new IndexOutOfBoundsException();

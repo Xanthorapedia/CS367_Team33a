@@ -1,4 +1,5 @@
 
+@SuppressWarnings("serial")
 public class GradeFileFormatException extends Exception {
 	
 	public GradeFileFormatException(){
