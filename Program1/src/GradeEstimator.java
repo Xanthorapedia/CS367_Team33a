@@ -38,22 +38,22 @@ public class GradeEstimator {
 		}
 		else {
 				// for each file, create report
-				for (String file: args) {
+				
 					try{
-						est = createGradeEstimatorFromFile(file);
+						est = createGradeEstimatorFromFile(args[0]);
 					}catch(FileNotFoundException e){
-						System.out.println("FNF");
+						System.out.println("java.io.FileNotFoundException: "+ args[0] +"(No such file or directory");
 						//TODO gracefully exit
 						return;
 					}catch(GradeFileFormatException e){
-						System.out.println("GFF");
+						System.out.println("GradeFileFormatException");
 						//e.printStackTrace();
 						//TODO gracefully exit
 						return;
 					}
 				}
 				System.out.println(est.getEstimateReport());
-			}
+			
 	}
 	
 
