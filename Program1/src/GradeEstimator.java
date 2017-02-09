@@ -26,7 +26,7 @@ public class GradeEstimator {
 		
 		GradeEstimator est = new GradeEstimator();
 		// if no args, create default report
-		if (args.length == 0) {
+		if (args.length != 1) {
 			System.out.println(Config.USAGE_MESSAGE);
 			try {
 				est.parse(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
