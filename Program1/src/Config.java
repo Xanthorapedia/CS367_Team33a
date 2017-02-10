@@ -1,12 +1,10 @@
-
-
 public class Config {
 
 	/** Default grade letters used if no grade info file provided. */
 	public static final String[] GRADE_LETTER = {"A","B","C","D","F","N"};
 
 	/** Default grade thresholds used if no grade info file provided. */
-	public static double[] GRADE_THRESHOLD = {90,80,70,60,50,10,0};
+	public static double[] GRADE_THRESHOLD = {90,80,70,60,5,0};
 
 	/** Default score categories used if no grade info file provided. */
 	public static String[] CATEGORY_KEY = {"homeworks","programs","midterms","final"};
@@ -22,10 +20,10 @@ public class Config {
 	 */
 	public static final String GRADE_INFO_FILE_FORMAT_EXAMPLE = 
 			
-			"A,B,C,D,F,N                    # letter grades\n"+
-			"90,80,70,60,5,0                # minimum thresholds\n"+
-			"homework,program,midterm,final # category names\n"+
-			"20,25,34,21                    # category weights of 100\n"+
+			"A B C D F N                    # letter grades\n"+
+			"90 80 70 60 5 0                # minimum thresholds\n"+
+			"homework program midterm final # category names\n"+
+			"20 25 34 21                    # category weights of 100\n"+
 			"h1 34 50                       # homework 1 34/50 points\n"+
 			"h2 29 30                       # homework 2\n"+
 			"p1 195 200                     # program 1\n"+
