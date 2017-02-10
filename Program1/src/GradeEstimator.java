@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 public class GradeEstimator {
 	// Patterns used for splitting and checking for formats
-	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|,|(#.*)+");
+	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
 	private static final Pattern PTRN_WORDS = 
-			Pattern.compile("\\s*[a-zA-Z]+((\\s+|,)[a-zA-Z]+)*\\s*(#.*)*");
+			Pattern.compile("\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
 	private static final Pattern PTRN_NUMBS = 
-			Pattern.compile("\\s*\\d+(.\\d+)*((\\s+|,)\\d+(.\\d+)*)*\\s*(#.*)*");
+			Pattern.compile("\\s*\\d+(.\\d+)*(\\s+\\d+(.\\d+)*)*\\s*(#.*)*");
 	private static final Pattern PTRN_ASGNS = 
 			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+(.\\d+)*){2}\\s*(#.*)*");
 	
