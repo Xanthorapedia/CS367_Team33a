@@ -1,10 +1,10 @@
 
 import java.util.*;
 public class ScoreIterator implements ScoreIteratorADT{
-	private ScoreList myScores;
+	private final ScoreList myScores;
 	private int currPos;
-	private String category;
-	private boolean everyCat;
+	private final String category;
+	private final boolean everyCat;
 	
 	public ScoreIterator(ScoreList myScores, String category){
 		if (myScores == null || category == null)
@@ -14,8 +14,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 		this.category = category;
 		
 		// if input == "", returns Scores from every category
-		if (category.equals(""))
-			everyCat = true;
+		everyCat = category.equals("") ? true : false;
 	}
 	
 	public boolean hasNext(){
