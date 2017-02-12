@@ -20,6 +20,15 @@
 // search, be sure to include Web URLs and description of 
 // of any information you find. 
 //////////////////////////// 80 columns wide //////////////////////////////////
+/**
+ * (Write a succinct description of this class here. You should avoid
+ * wordiness and redundancy. If necessary, additional paragraphs should
+ * be preceded by <p>, the html tag for a new paragraph.)
+ *
+ * <p>Bugs: (a list of bugs and other problems)
+ *
+ * @author Team 33 Members
+ */
 
 @SuppressWarnings("serial")
 public class GradeFileFormatException extends Exception {
