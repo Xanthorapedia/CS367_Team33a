@@ -54,13 +54,11 @@ public class GradeEstimator {
 		// if no args, create default report
 		if (args.length != 1) {
 			System.out.println(Config.USAGE_MESSAGE);
-			try {
-				est.parse(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
-				System.out.println(est.getEstimateReport());
-			} catch (GradeFileFormatException e) {
-				// Not gonna happen
-				e.printStackTrace();
-			}
+			est.categoryNames = Config.CATEGORY_KEY;
+			est.categoryWeights = Config.CATEGORY_WEIGHT;
+			est.letterGrades = Config.GRADE_LETTER;
+			est.miniThresholds = Config.GRADE_THRESHOLD;
+			System.out.println(est.getEstimateReport());
 		}
 		else {
 			// create and print report
@@ -107,7 +105,7 @@ public class GradeEstimator {
 					score.getName(), score.getPercent());
 		}
 		
-		estimateReport += "\nGrades estimate is based on " + scores.size() + 
+		estimateReport += "\nGrade estimate is based on " + scores.size() + 
 				" scores\n";
 		
 		// calculate the average percent of each category
