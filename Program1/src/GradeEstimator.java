@@ -16,7 +16,7 @@
 // Persons: none.
 // 
 // Online sources: 
-//		Pattern class usage:
+//		Pattern Class usage:
 //		https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
 //////////////////////////// 80 columns wide //////////////////////////////////
 import java.io.FileNotFoundException;
