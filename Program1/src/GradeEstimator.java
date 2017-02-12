@@ -101,11 +101,11 @@ public class GradeEstimator {
 		iter = new ScoreIterator(scores, "");
 		while(iter.hasNext()) {
 			Score score = iter.next();
-			estimateReport += String.format("%s%7.2f\n", 
+			estimateReport += String.format("%s %7.2f\n", 
 					score.getName(), score.getPercent());
 		}
 		
-		estimateReport += "\nGrade estimate is based on " + scores.size() + 
+		estimateReport += "Grade estimate is based on " + scores.size() + 
 				" scores\n";
 		
 		// calculate the average percent of each category
