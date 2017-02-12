@@ -5,31 +5,31 @@
 //
 // TEAM:    team 33
 // Authors: team 33 members
-// Author1: (Dasong Gao,dgao24@wisc.edu,dgao24,lec001)
-// Author2: (Sam Ruh,sruh@wisc.edu,sruh,lec001)
-// Author3: (Maggie Buday,Mbuday@wisc.edu,mbuday,lec001)
-// Author4: (Bobby Lv,zlv7,zlv7@wisc.edu,lec001)
-// Author5: (Meredith Lou,ylou9@wisc.edu,ylou9,lec001)
-// Author6: (Apoorva Dhawan,dhawan3@wisc.edu,dhawan3,lec001)
+// Author1: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
+// Author2: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
+// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author4: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author5: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author6: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
 //
 // ---------------- OTHER ASSISTANCE CREDITS 
-// Persons: Identify persons by name, relationship to you, and email. 
-// Describe in detail the the ideas and help they provided. 
+// Persons: none.
 // 
-// Online sources: avoid web searches to solve your problems, but if you do 
-// search, be sure to include Web URLs and description of 
-// of any information you find. 
+// Online sources: none.
 //////////////////////////// 80 columns wide //////////////////////////////////
+
 /**
- * (Write a succinct description of this class here. You should avoid
- * wordiness and redundancy. If necessary, additional paragraphs should
- * be preceded by <p>, the html tag for a new paragraph.)
- *
- * <p>Bugs: (a list of bugs and other problems)
+ * This is an exception type signalizing an error in the file fed into
+ * GradeEstimator. Errors include:
+ * 	<li>1. some line being legal
+ * 	<li>2. no enough grades for thresholds (or the reverse)
+ * 	<li>3. disordered thresholds
+ * 	<li>4. weights failing to add up 100
+ * 	<li>5. no enough weights for categories (or the reverse)
+ * 	<li>6. adding an assignment of an unknown category
  *
  * @author Team 33 Members
  */
-
 @SuppressWarnings("serial")
 public class GradeFileFormatException extends Exception {
 

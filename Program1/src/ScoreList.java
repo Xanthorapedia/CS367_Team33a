@@ -1,24 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // Semester:         CS367 Spring 2017 
-// PROJECT:          p1 Grade Estimator
+// PROJECT:          p0
 // FILE:             ScoreList.java
 //
-// TEAM:    team 33
-// Authors: team 33 members
-// Author1: (Dasong Gao,dgao24@wisc.edu,dgao24,lec001)
-// Author2: (Sam Ruh,sruh@wisc.edu,sruh,lec001)
-// Author3: (Maggie Buday,Mbuday@wisc.edu,mbuday,lec001)
-// Author4: (Bobby Lv,zlv7,zlv7@wisc.edu,lec001)
-// Author5: (Meredith Lou,ylou9@wisc.edu,ylou9,lec001)
-// Author6: (Apoorva Dhawan,dhawan3@wisc.edu,dhawan3,lec001)
+// Authors: Sam Ruh
+// Author1: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
 //
-// ---------------- OTHER ASSISTANCE CREDITS 
-// Persons: Identify persons by name, relationship to you, and email. 
-// Describe in detail the the ideas and help they provided. 
-// 
-// Online sources: avoid web searches to solve your problems, but if you do 
-// search, be sure to include Web URLs and description of 
-// of any information you find. 
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 
@@ -26,10 +13,12 @@
  * This class will store and keep track of a list of scores. It can get,
  * remove, and add scores. It is an instantiable class so more than one 
  * list can be made. 
+ * 
+ * @author Sam Ruh
  */
 public class ScoreList implements ScoreListADT {
 	//an array to store all of the score objects
-	private Score[] list = new Score[1];
+	private Score[] list = new Score[10];
 	
 	//the number of scores in the array
 	private int numScores = 0;
@@ -70,6 +59,9 @@ public class ScoreList implements ScoreListADT {
 		numScores++;
 	}
 	
+	/**
+	 * Expands the internal array if there is no enough space for the new item.
+	 */
 	private void expandArray() {
 		Score[] a = new Score[list.length * 2];
 		for (int i = 0; i < numScores; i++)

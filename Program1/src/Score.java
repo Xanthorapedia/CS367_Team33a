@@ -1,45 +1,24 @@
 /////////////////////////////////////////////////////////////////////////////
-// Semester:         CS367 Spring 2017
-// PROJECT:          p1 Grade Estimator
-// FILE:             Score.java
+// Semester:         CS367 Spring 2017 
+// PROJECT:          p0
+// FILE:             ScoreList.java
 //
-// TEAM:    team 33
-// Authors: team 33 members
-// Author1: (Dasong Gao,dgao24@wisc.edu,dgao24,lec001)
-// Author2: (Sam Ruh,sruh@wisc.edu,sruh,lec001)
-// Author3: (Maggie Buday,Mbuday@wisc.edu,mbuday,lec001)
-// Author4: (Bobby Lv,zlv7,zlv7@wisc.edu,lec001)
-// Author5: (Meredith Lou,ylou9@wisc.edu,ylou9,lec001)
-// Author6: (Apoorva Dhawan,dhawan3@wisc.edu,dhawan3,lec001)
+// Authors: Sam Ruh
+// Author1: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
 //
-// ---------------- OTHER ASSISTANCE CREDITS 
-// Persons: Identify persons by name, relationship to you, and email. 
-// Describe in detail the the ideas and help they provided. 
-// 
-// Online sources: avoid web searches to solve your problems, but if you do 
-// search, be sure to include Web URLs and description of 
-// of any information you find. 
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 /**
  * This class is an instantiable class for holding test results. It has three
  * fields it will be storing for each instance of this class that is created.
  *
- *
- * @author Sam Ruh =======
- * 
- *         /** This class is an instantiable class for holding test results. It
- *         has three fields it will be storing for each instance of this class
- *         that is created.
- *
- *
- * @author >>>>>>> branch 'master' of https://github.com/TG55AA/CS367_Team33
+ * @author Sam Ruh
  */
 public class Score {
 	private String name; // the name of the student
 	private double pointsEarn; // the number of points the student earned
 	private double pointsPos; // the total possible points for the test
-
+ 
 	/**
 	 * This is the constructor for the Score class. It will check to make sure
 	 * none of the variables sent to it are legal.

@@ -26,18 +26,25 @@ import java.util.regex.Pattern;
 
 
 public class GradeEstimator {
-	// Patterns used for splitting and checking for formats
+	/** Pattern for spliting line: split at whitespace or #comment*/
 	private static final Pattern PTRN_SPLIT = Pattern.compile("\\s+|(#.*)+");
+	/** Pattern for words line: word0 ( word1 word2...) (#comment)*/
 	private static final Pattern PTRN_WORDS = 
 			Pattern.compile("\\s*[a-zA-Z]+(\\s+[a-zA-Z]+)*\\s*(#.*)*");
+	/** Pattern for numbers line: num0 ( num1 num2...) (#comment)*/
 	private static final Pattern PTRN_NUMBS = 
 			Pattern.compile("\\s*\\d+(.\\d+)*(\\s+\\d+(.\\d+)*)*\\s*(#.*)*");
+	/** Pattern for assignments line: letter(num) num1 num2 (#comment)*/
 	private static final Pattern PTRN_ASGNS = 
 			Pattern.compile("\\s*[a-zA-Z]\\d*(\\s+\\d+(.\\d+)*){2}\\s*(#.*)*");
 	
+	/** Grade letters*/
 	private String [] letterGrades;
-	private double [] miniThresholds; 
+	/** Grade thresholds*/
+	private double [] miniThresholds;
+	/** Category names*/
 	private String [] categoryNames;
+	/** Category weights*/
 	private double [] categoryWeights;
 	
 	private ScoreList scores = new ScoreList();
@@ -74,9 +81,10 @@ public class GradeEstimator {
 	}
 	
 
-	public static GradeEstimator createGradeEstimatorFromFile( String gradeInfo ) 
+	public static GradeEstimator createGradeEstimatorFromFile(String gradeInfo)
 			throws FileNotFoundException, GradeFileFormatException{
 		Scanner stdIn = new Scanner(new File(gradeInfo));
+		
 		GradeEstimator ge = new GradeEstimator();
 		ge.parse(stdIn);
 		return ge;
@@ -84,16 +92,19 @@ public class GradeEstimator {
 
 
 	public String getEstimateReport(){
+		// report results
 		String estimateReport = "";
 		// final weighted percent
 		double weightedPercentTotal = 0;
-		ScoreIterator iter = new ScoreIterator(scores, "");
+		// Score iterator
+		ScoreIterator iter = null;
 		
 		// print all assignments regardless of the category
+		iter = new ScoreIterator(scores, "");
 		while(iter.hasNext()) {
 			Score score = iter.next();
-			estimateReport += score.getName() + 
-					String.format("%7.2f", score.getPercent()) + "\n";
+			estimateReport += String.format("%s%7.2f\n", 
+					score.getName(), score.getPercent());
 		}
 		
 		estimateReport += "\nGrades estimate is based on " + scores.size() + 
@@ -113,44 +124,42 @@ public class GradeEstimator {
 				count++;
 			}
 			// if no score for a category, average percent = 100
-			percent = (count == 0 ? 100 : percent / count);
+			percent = count == 0 ? 100 : percent / count;
 			
-			double weightPercent = categoryWeights[i] / 100 * percent;
-			estimateReport += String.format("%7.2f", weightPercent) + "% = " + 
-					String.format("%5.2f", percent) + "% of " + 
-					String.format("%2.0f", categoryWeights[i]) + "% for " + 
-					cat + "\n";
+			double weightPercent = percent * categoryWeights[i] / 100;
+			estimateReport += String.format(
+					"%7.2f%% = %5.2f%% of %2.0f%% for %s\n",
+					weightPercent, percent, categoryWeights[i], cat);
 			weightedPercentTotal += weightPercent;
 		}
 		
 		estimateReport += "--------------------------------\n";
-		estimateReport += String.format("%7.2f", weightedPercentTotal) + 
-				"% weighted percent\n";
+		estimateReport += String.format("%7.2f%% weighted percent\n", 
+				weightedPercentTotal);
 		estimateReport += "Letter Grade Estimate: ";
 		
+		// pick a suitable grade
 		for (int i = 0; i < miniThresholds.length; i++)
 			if (weightedPercentTotal >= miniThresholds[i])
 				return estimateReport += letterGrades[i];
 		
 		return estimateReport += 
-			"Letter Grade Estimate: unable to estimate letter grade for " +
-			weightedPercentTotal;
-		   
+			"unable to estimate letter grade for " + weightedPercentTotal;
 	}
 	
 	/**
-	 * A method to check and parse the file. Any error is indicated in exception message 
-	 * The method checks for:
-	 * 	1. if each of the line is legal
-	 * 	2. if grades correspond to thresholds
-	 * 	3. if thresholds are in decreasing order
-	 * 	4. if weights add up 100
-	 * 	5. if weights correspond to categories
-	 * 	6. if the category does not exist for an assignment
+	 * A method to check and parse the file. The error is indicated in 
+	 * exception message. The method checks for:
+	 * 	<li>1. if each of the line is legal
+	 * 	<li>2. if grades correspond to thresholds
+	 * 	<li>3. if thresholds are in decreasing order
+	 * 	<li>4. if weights add up 100
+	 * 	<li>5. if weights correspond to categories
+	 * 	<li>6. if the category does not exist for an assignment
 	 * 
-	 * @param path - file path
-	 * @throws FileNotFoundException - if file is not found
-	 * @throws Exception - basically GradeFileFormatException, in case you don't have that
+	 * @param stdIn - the Scanner for input
+	 * @throws FileNotFoundException if the file is not found
+	 * @throws GradeFileFormatException if the file is corrupted
 	 */
 	private void parse(Scanner stdIn) throws GradeFileFormatException {
 		// file input and current line
@@ -170,48 +179,47 @@ public class GradeEstimator {
 		int i = 0;
 		while (stdIn.hasNextLine()) {
 			tmp = stdIn.nextLine();
-			// parse words: word0 ( word1 word2...) (#comment)
+			// choose parser
 			if (i == 0 || i == 2)
 				pattern = PTRN_WORDS;
-			// parse numbers: num0 ( num1 num2...) (#comment)
 			else if (i == 1 || i == 3)
 				pattern = PTRN_NUMBS;
-			// parse assignments: category(num) pEarned pPossible (#comment)
 			else
 				pattern = PTRN_ASGNS;
 			
-			// if matches, split to get info; if no match, bad file
+			// if matches, split to get info;
 			if (pattern.matcher(tmp).matches()) {
 				String[] splitStrings = PTRN_SPLIT.split(tmp);
-				// grades line
-				if (i == 0)
+				switch(i) {
+				case 0: // grades line
 					grades = splitStrings;
-				// thresholds line, parse thresholds and put into int[]
-				else if (i == 1) {
+					break;
+					
+				case 1: // thresholds line
 					thresholds = new double[splitStrings.length];
 					for (int j = 0; j < splitStrings.length; j++)
 						thresholds[j] = Double.parseDouble(splitStrings[j]);
-				}
-				// categories line
-				else if (i == 2)
+					break;
+					
+				case 2: // categories line
 					categories = splitStrings;
-				// weights line, parse thresholds and put into int[]
-				else if (i == 3) {
+					break;
+				
+				case 3: // weights line
 					weights = new double[splitStrings.length];
 					for (int j = 0; j < splitStrings.length; j++)
-						weights[j] = Integer.parseInt(splitStrings[j]);
-				}
-				// any other assignment lines
-				else {
+						weights[j] = Double.parseDouble(splitStrings[j]);
+					break;
+				
+				default: // any other assignment lines
 					// check if the category exists
 					boolean found = false;
-					for (String cat : categories) {
+					for (String cat : categories)
 						if (splitStrings[0].charAt(0) == cat.charAt(0))
 							found = true;
-					}
 					if (!found)
 						throw new GradeFileFormatException(
-								"Unknown Assignment Category: " + splitStrings[0]);
+							"Unknown Assignment Category: " + splitStrings[0]);
 					
 					// parse and add assignment
 					double earned = Double.parseDouble(splitStrings[1]);
@@ -219,17 +227,17 @@ public class GradeEstimator {
 					scores.add(new Score(splitStrings[0], earned, max));
 				}
 			}
-			else {
-				stdIn.close();
-				throw new GradeFileFormatException("Bad Line (" + i + "): " + tmp);
-			}
-			
+			// if this line does not match format
+			else
+				throw new GradeFileFormatException(
+						"Bad Line (" + i + "): " + tmp);
 			i++;
 		}
-		stdIn.close();
 		
+		// check for header line #
 		if (i < 4)
-			throw new GradeFileFormatException("Unexpected File Header End: " + tmp);
+			throw new GradeFileFormatException(
+					"Unexpected File Header End: " + tmp);
 		
 		// #grades should = #thresholds
 		if (grades.length != thresholds.length) {
@@ -255,11 +263,10 @@ public class GradeEstimator {
 		if (sum != 100)
 			throw new GradeFileFormatException("Bad Weights: sum = " + sum);
 		
+		// update fields
 		letterGrades = grades;
 		miniThresholds = thresholds;
 		categoryNames = categories;
 		categoryWeights = weights;
-		
-		stdIn.close();
 	}
 }

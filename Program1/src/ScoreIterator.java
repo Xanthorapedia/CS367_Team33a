@@ -21,7 +21,7 @@ import java.util.NoSuchElementException;
 
 /**
  *  This class is designed to iterate through a given ScoreList considering 
- *  only the items in the ScoreList that match a given category
+ *  only the items in the ScoreList that match a given category.
  *  @auther TODO who?
  */
 public class ScoreIterator implements ScoreIteratorADT{
@@ -36,7 +36,8 @@ public class ScoreIterator implements ScoreIteratorADT{
 	
 	/**
 	 * The consructor sets up a iterator of a ScoreList of a given category.
-	 * Throws IllegalArgumentException if either of the arguments is null.
+	 * Empty category ("") is considered as any known Score category in the
+	 * list.
 	 * @param myScores - the source of the iterator
 	 * @param category - the category of the iterator
 	 */
@@ -52,6 +53,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 		// if input == "", returns Scores in every category
 		everyCat = category.equals("") ? true : false;
 	}
+	
 	/**
 	 * This method determines if there are any more items in the list
 	 * @see ScoreIteratorADT#hasNext()
@@ -69,7 +71,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 	/**
 	 * This method return next element from the list
 	 * @see ScoreIteratorADT#next()
-	 * @ return the next element
+	 * @return the next element
 	 */
 	public Score next(){
 		if (!hasNext())
