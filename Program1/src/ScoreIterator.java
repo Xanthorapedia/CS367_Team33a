@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Semester:         CS367 Spring 2016 
+// Semester:         CS367 Spring 2017 
 // PROJECT:          p1 Grade Estimator
 // FILE:             ScoreIterator.java
 //
