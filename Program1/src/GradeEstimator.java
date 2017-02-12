@@ -19,11 +19,24 @@
 //		Pattern Class usage:
 //		https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
 //////////////////////////// 80 columns wide //////////////////////////////////
+
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * This class is a tool for students in class to esimate the grade they may
+ * receive in a class. It takes a signle input file about grade information from
+ * a single student and then uses it to generate a grade report for that
+ * student. The grade reports shows the percent and weighted percent grades that
+ * student receives in each assignment category. And it also generate an
+ * estimated letter grade for this student.
+ *
+ * <p>Bugs: (a list of bugs and other problems)
+ *
+ * @author Team 33 Member
+ */
 
 public class GradeEstimator {
 	/** Pattern for spliting line: split at whitespace or #comment*/
@@ -49,16 +62,28 @@ public class GradeEstimator {
 	
 	private ScoreList scores = new ScoreList();
 	
+	/**
+	 * This is the main method for the GradeEstimator class. If a file is not
+	 * passed in through args[], it will use default information in Config.java
+	 * 
+	 * This method also handles the exception that may be thrown by other method
+	 * and create an instance of GradeEstimator. 
+	 * 
+	 * @param args
+	 *            takes a single input file containing grade information
+	 */
 	public static void main(String[] args) {
 		GradeEstimator est = new GradeEstimator();
 		// if no args, create default report
 		if (args.length != 1) {
 			System.out.println(Config.USAGE_MESSAGE);
-			est.categoryNames = Config.CATEGORY_KEY;
-			est.categoryWeights = Config.CATEGORY_WEIGHT;
-			est.letterGrades = Config.GRADE_LETTER;
-			est.miniThresholds = Config.GRADE_THRESHOLD;
-			System.out.println(est.getEstimateReport());
+			try {
+				est.parse(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
+				System.out.println(est.getEstimateReport());
+			} catch (GradeFileFormatException e) {
+				// Not gonna happen
+				e.printStackTrace();
+			}
 		}
 		else {
 			// create and print report
@@ -78,7 +103,20 @@ public class GradeEstimator {
 			
 	}
 	
-
+	/**
+	 * This method creates a new instance of the GradeEstimator class using the
+	 * filename gradeInfo. It reads the gradeInfo and create an instance of 
+	 * GradeEstimator using the information from the gradeInfo file.
+	 * 
+	 * @param gradeInfo
+	 *            is a String containing grade informations
+	 * @return an instance of GradeEstimator
+	 * @throws FileNotFoundException
+	 *             if given filename does not exist or if the format of the file
+	 *             is wrong
+	 * @throws GradeFileFormatException
+	 *             if a line is not in the expected format
+	 */
 	public static GradeEstimator createGradeEstimatorFromFile(String gradeInfo)
 			throws FileNotFoundException, GradeFileFormatException{
 		Scanner stdIn = new Scanner(new File(gradeInfo));
@@ -88,7 +126,14 @@ public class GradeEstimator {
 		return ge;
 	}
 
-
+	/**
+	 * This method returns a string that contains the calculated weighted score
+	 * from each category, the percent grades they received on each assignment.
+	 * The overall score will be also calculated and this method assigns a
+	 * letter grade to this student.
+	 *
+	 * @return a String representing a grade report for the student
+	 */
 	public String getEstimateReport(){
 		// report results
 		String estimateReport = "";
@@ -105,7 +150,7 @@ public class GradeEstimator {
 					score.getName(), score.getPercent());
 		}
 		
-		estimateReport += "\nGrade estimate is based on " + scores.size() + 
+		estimateReport += "\nGrades estimate is based on " + scores.size() + 
 				" scores\n";
 		
 		// calculate the average percent of each category

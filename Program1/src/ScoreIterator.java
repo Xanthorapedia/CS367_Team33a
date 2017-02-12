@@ -22,7 +22,7 @@ import java.util.NoSuchElementException;
 /**
  *  This class is designed to iterate through a given ScoreList considering 
  *  only the items in the ScoreList that match a given category.
- *  @auther TODO who?
+ *  @auther Team 33 Members
  */
 public class ScoreIterator implements ScoreIteratorADT{
 	/** instance variable for Scorelist class*/
