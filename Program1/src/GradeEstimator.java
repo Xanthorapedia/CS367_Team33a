@@ -102,21 +102,19 @@ public class GradeEstimator {
 			weightedPercentTotal += weightPercent;
 		}
 		
-			estimateReport += "--------------------------------\n";
-			estimateReport += String.format("%7.2f",weightedPercentTotal) + "% weighted percent\n";
-			estimateReport += "Letter Grade Estimate: ";
-			
-			for (int i = 0; i < miniThresholds.length; i++)
-				if (weightedPercentTotal > miniThresholds[i]) {
-					estimateReport += letterGrades[i];
-					break;
-				}
-			   
-			return estimateReport;
-
+		estimateReport += "--------------------------------\n";
+		estimateReport += String.format("%7.2f", weightedPercentTotal) + 
+				"% weighted percent\n";
+		estimateReport += "Letter Grade Estimate: ";
 		
-	
-	
+		for (int i = 0; i < miniThresholds.length; i++)
+			if (weightedPercentTotal >= miniThresholds[i])
+				return estimateReport += letterGrades[i];
+		
+		return estimateReport += 
+			"Letter Grade Estimate: unable to estimate letter grade for " +
+			weightedPercentTotal;
+		   
 	}
 	
 	/**

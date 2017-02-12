@@ -13,7 +13,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 		this.currPos = 0;
 		this.category = category;
 		
-		// if input == "", returns Scores from every category
+		// if input == "", returns Scores in every category
 		everyCat = category.equals("") ? true : false;
 	}
 	
