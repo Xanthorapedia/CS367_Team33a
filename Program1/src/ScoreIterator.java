@@ -8,25 +8,32 @@
 //
 //
 import java.util.*;
-/*
- *  This class is designed to iterate through a given ScoreList considering only the items 
- *  in the ScoreList that match a given category
+
+/**
+ *  This class is designed to iterate through a given ScoreList considering 
+ *  only the items in the ScoreList that match a given category
+ *  @auther TODO who?
  */
 public class ScoreIterator implements ScoreIteratorADT{
-	private final ScoreList myScores; //instance variable for Scorelist class
-	private int currPos;  //track iterator's current position
-	private final String category; //category for different subjects
+	/** instance variable for Scorelist class*/
+	private final ScoreList myScores;
+	/** current position*/
+	private int currPos;
+	/** category of this iterator*/
+	private final String category;
 	private final boolean everyCat; 
-/*
- * This method is to determine if the scorelist passed is null and 
- * throw illegal argument exception and initialize all instance variables
- * PRECONDITIONS: a list of scores and category name are passed 
- * PRECONDITIONS:return scores from every category
- */
+	
+	/**
+	 * The consructor sets up a iterator of a ScoreList of a given category.
+	 * Throws IllegalArgumentException if either of the arguments is null.
+	 * @param myScores - the source of the iterator
+	 * @param category - the category of the iterator
+	 */
 	public ScoreIterator(ScoreList myScores, String category){
+		// throws exception when the parameter is null
 		if (myScores == null || category == null)
 			throw new IllegalArgumentException(); 
-		//throws exception when the parameter is null
+		
 		this.myScores = myScores;
 		this.currPos = 0;
 		this.category = category;
@@ -34,14 +41,13 @@ public class ScoreIterator implements ScoreIteratorADT{
 		// if input == "", returns Scores in every category
 		everyCat = category.equals("") ? true : false;
 	}
-	/*
+	/**
 	 * This method determines if there are any more items in the list
-	 * (non-Javadoc)
 	 * @see ScoreIteratorADT#hasNext()
 	 * @return true if there are items, otherwise false
 	 */
 	public boolean hasNext(){
-		// if not find the assignment with the correct category, goto next
+		// if the assignment with the correct category is not found, goto next
 		while (currPos < myScores.size() && !everyCat
 				&& !myScores.get(currPos).getCategory()
 				.equals(category.substring(0, 1)))
@@ -49,7 +55,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 		return currPos < myScores.size();
 	}
 	
-	/*
+	/**
 	 * This method return next element from the list
 	 * (non-Javadoc)
 	 * @see ScoreIteratorADT#next()
