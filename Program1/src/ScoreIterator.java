@@ -1,13 +1,19 @@
 /////////////////////////////////////////////////////////////////////////////
 // Semester:         CS367 Spring 2016 
-// PROJECT:          Gradeestimator 
+// PROJECT:          Gradeestimator
 // FILE:             ScoreIterator.java
 //
-// TEAM:    Team 33
+// TEAM:    33 team33
+// Authors: TODO who?
+// Author1: Dasong Gao, dgao24@wisc.edu, dgao24, 001
+// Author2: (name2,email2,netID2,lecture number2)
+//
+// ---------------- OTHER ASSISTANCE CREDITS 
+// Persons: none.
 // 
-//
-//
-import java.util.*;
+// Online sources: none.
+//////////////////////////// 80 columns wide //////////////////////////////////
+import java.util.NoSuchElementException;
 
 /**
  *  This class is designed to iterate through a given ScoreList considering 
@@ -21,6 +27,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 	private int currPos;
 	/** category of this iterator*/
 	private final String category;
+	/** selects every category flag*/
 	private final boolean everyCat; 
 	
 	/**
@@ -51,13 +58,12 @@ public class ScoreIterator implements ScoreIteratorADT{
 		while (currPos < myScores.size() && !everyCat
 				&& !myScores.get(currPos).getCategory()
 				.equals(category.substring(0, 1)))
-			currPos++; //increment its current position 
+			currPos++;
 		return currPos < myScores.size();
 	}
 	
 	/**
 	 * This method return next element from the list
-	 * (non-Javadoc)
 	 * @see ScoreIteratorADT#next()
 	 * @ return the next element
 	 */
