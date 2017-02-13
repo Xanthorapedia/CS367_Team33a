@@ -68,8 +68,7 @@ public class GradeEstimator {
 	 * This method also handles the exception that may be thrown by other method
 	 * and create an instance of GradeEstimator. 
 	 * 
-	 * @param args
-	 *            takes a single input file containing grade information
+	 * @param args - the path of an input file containing grade information
 	 */
 	public static void main(String[] args) {
 		GradeEstimator est = new GradeEstimator();
