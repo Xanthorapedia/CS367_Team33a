@@ -59,6 +59,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 	 * @see ScoreIteratorADT#hasNext()
 	 * @return true if there are items, otherwise false
 	 */
+	@Override
 	public boolean hasNext(){
 		// if the assignment with the correct category is not found, goto next
 		while (currPos < myScores.size() && !everyCat
@@ -73,6 +74,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 	 * @see ScoreIteratorADT#next()
 	 * @return the next element
 	 */
+	@Override
 	public Score next(){
 		if (!hasNext())
 			throw new NoSuchElementException();

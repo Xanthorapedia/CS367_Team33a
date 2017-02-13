@@ -32,6 +32,7 @@ public class ScoreList implements ScoreListADT {
 	 *
 	 * @return the number of items in the list
 	 */
+	@Override
 	public int size() {
 		return numScores;
 	}
@@ -47,6 +48,7 @@ public class ScoreList implements ScoreListADT {
 	 *
 	 * @param s a new score object to be added to the list of score objects
 	 */
+	@Override
 	public void add(Score s) throws IllegalArgumentException {
 		/*checks to make sure the given score object is not null so the
 		 *  ScoreList class follows ADT rules and is contiguous*/
@@ -80,6 +82,7 @@ public class ScoreList implements ScoreListADT {
 	 * @param i is an index for a given score object in the list 
 	 * @return the score object at the given index
 	 */
+	@Override
 	public Score remove(int i) throws IndexOutOfBoundsException {
 		//checks to make sure the given index is in bounds
 		if (i < 0 || i > numScores)
@@ -107,6 +110,7 @@ public class ScoreList implements ScoreListADT {
 	 * @param i is an index for a given score object in the list 
 	 * @return the score object at the given index
 	 */
+	@Override
 	public Score get(int i) throws IndexOutOfBoundsException {
 		//checks to make sure the given index is in bounds
 		if (i < 0 || i > numScores)
