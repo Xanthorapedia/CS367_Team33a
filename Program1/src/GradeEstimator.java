@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class is a tool for students in class to esimate the grade they may
- * receive in a class. It takes a signle input file about grade information from
+ * receive in a class. It takes a single input file about grade information from
  * a single student and then uses it to generate a grade report for that
  * student. The grade reports shows the percent and weighted percent grades that
  * student receives in each assignment category. And it also generate an
@@ -76,8 +76,10 @@ public class GradeEstimator {
 		GradeEstimator est = new GradeEstimator();
 		// if no args, create default report
 		if (args.length != 1) {
-			System.out.println(Config.USAGE_MESSAGE);
+			//if there are not only one file, print out default message
+			System.out.println(Config.USAGE_MESSAGE); 
 			try {
+				//parse and scan the file
 				est.parse(new Scanner(Config.GRADE_INFO_FILE_FORMAT_EXAMPLE));
 				System.out.println(est.getEstimateReport());
 			} catch (GradeFileFormatException e) {
@@ -88,14 +90,15 @@ public class GradeEstimator {
 		else {
 			// create and print report
 			try{
+				//arg[0] is the file name
 				est = createGradeEstimatorFromFile(args[0]);
 			} catch(FileNotFoundException e) {
-				System.out.println("Sorry, the file \""+ args[0]
-						+ "\" is not found.");
+				System.out.println("java.io.FileNotFoundException: "+ args[0]
+						+ " (No such file or directory)");
 				return;
 			} catch(GradeFileFormatException e) {
-				System.out.println("Sorry, the file \""+ args[0]
-						+ "\" is corrupted:\n" + e.getMessage());
+				System.out.println("java.io.GradeFileFormatException: "+ args[0]
+						+ " (No such file or directory)" + e.getMessage());
 				return;
 			}
 			System.out.println(est.getEstimateReport());

@@ -19,8 +19,8 @@
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 /**
- * 
- * @author TODO
+ * This is the ScoreIterator interface
+ * @author Team 33
  *
  */
 public interface ScoreIteratorADT{
