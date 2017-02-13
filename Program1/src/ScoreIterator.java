@@ -35,7 +35,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 	private final boolean everyCat; 
 	
 	/**
-	 * The consructor sets up a iterator of a ScoreList of a given category.
+	 * The constructor sets up a iterator of a ScoreList of a given category.
 	 * Empty category ("") is considered as any known Score category in the
 	 * list.
 	 * @param myScores - the source of the iterator
@@ -64,7 +64,7 @@ public class ScoreIterator implements ScoreIteratorADT{
 		while (currPos < myScores.size() && !everyCat
 				&& !myScores.get(currPos).getCategory()
 				.equals(category.substring(0, 1)))
-			currPos++;
+			currPos++; 
 		return currPos < myScores.size();
 	}
 	
