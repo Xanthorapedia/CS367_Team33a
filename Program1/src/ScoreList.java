@@ -3,8 +3,14 @@
 // PROJECT:          p0
 // FILE:             ScoreList.java
 //
-// Authors: Sam Ruh
-// Author1: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
+// TEAM:    team 33
+// Authors: team 33 members
+// Author1: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
+// Author2: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
+// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author4: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author5: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author6: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
 //
 //////////////////////////// 80 columns wide //////////////////////////////////
 

@@ -33,10 +33,20 @@
 @SuppressWarnings("serial")
 public class GradeFileFormatException extends Exception {
 
+	/**
+	 * This method constructs a GradeFileFormatExcpetion with default parameter.
+	 * And it inheritance the constructor of Exception.
+	 *
+	 */
 	public GradeFileFormatException() {
 		super();
 	}
 
+	/**
+	 * This method constructs a GradeFileFormatExcpetion with String parameter.
+	 * And it inheritance the constructor of Exception.
+	 *
+	 */
 	public GradeFileFormatException(String msg) {
 		super(msg);
 	}
