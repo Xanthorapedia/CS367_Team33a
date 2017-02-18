@@ -4,21 +4,21 @@ import java.util.NoSuchElementException;
 /**
  * This class implements the Job iterator for the JobList Class.
  * The remove() method is not used.
+ * 
  * @author Dasong Gao
  *
  */
 public class JobListIterator implements Iterator<Job> {
-	/** the header node of the Job list*/
-	Listnode<Job> header;
+
 	/** the current Listnode*/
-	Listnode<Job> cur;
+	private Listnode<Job> cur;
 	
 	/**
 	 * The constructor creates a iterator of JobList.
 	 * @param header - the header node of the list
 	 */
 	public JobListIterator(Listnode<Job> header) {
-		this.cur = this.header = header;
+		cur = header;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class JobListIterator implements Iterator<Job> {
 	 */
 	@Override
 	public Job next() {
-		if (!this.hasNext())
+		if (!hasNext())
 			throw new NoSuchElementException();
 		cur = cur.getNext();
 		return cur.getData();
