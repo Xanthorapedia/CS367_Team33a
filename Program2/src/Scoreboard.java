@@ -7,12 +7,17 @@
  *
  */
 public class Scoreboard implements ScoreboardADT {
-	
+
 	/** the list of jobs completed*/
 	private ListADT<Job> list;
-	
+
 	/** total score earned*/
 	private int totalScore;
+	
+	public Scoreboard(){
+	    totalScore = 0; 
+	    list = new JobList();
+	}
 
 	/**
 	 * This method calculates the total score earned.
@@ -31,7 +36,7 @@ public class Scoreboard implements ScoreboardADT {
 	public void updateScoreBoard(Job job) {
 		if (job == null)
 			throw new IllegalArgumentException();
-		
+
 		list.add(job);
 		totalScore += job.getPoints();
 	}
@@ -51,7 +56,7 @@ public class Scoreboard implements ScoreboardADT {
 		for (Job job : list)
 			System.out.println(
 					"Job Name: " + job.getJobName() + "\n" +
-					"Points earned for this job: " + job.getPoints() + "\n" +
+							"Points earned for this job: " + job.getPoints() + "\n" +
 					"--------------------------------------------");
 	}
 
