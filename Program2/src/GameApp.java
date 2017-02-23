@@ -33,12 +33,16 @@ public class GameApp{
         int seed = Integer.parseInt(args[0]);
         int timeToPlay = Integer.parseInt(args[1]);
         GameApp gameApp = new GameApp(seed,timeToPlay);
+        Game game = new Game(seed,timeToPlay);
         
         System.out.println("You have" + timeToPlay + "left in the game!");
         
+        gameApp.start();
         
-        
-        
+        /*Game Over */
+         
+        System.out.println("Game Over!");
+        System.out.println("Your final score: " + game.getTotalScore());
         
         
         
@@ -51,6 +55,32 @@ public class GameApp{
      */
     private void start(){
         //TODO: The interactive game logic goes here
+        Game game = new Game(seed,timeToPlay);
+        game.createJobs();
+        game.displayActiveJobs();
+        int jobIndex = readInput("Select a job to work on: ");
+        int jobTime = readInput("For how long would you like to work on this job?: ");
+        Job job = game.updateJob(jobIndex, jobTime);
+        if(job != null){
+        	int insertJob = readInput("At what position would you like to insert the job back into the list?\n ");
+        	game.addJob(jobIndex,job);
+        	
+        }
+        else{
+             System.out.println("Job completed! Current Score: " + game.getTotalScore());
+        }
+        
+    	
+    }
+    
+    public int readInput(String message){
+    	System.out.print(message);
+    	int input = STDIN.nextInt();
+    	if(input <= 0){
+    		System.out.println("It is invalid number");
+    	}
+    	
+    	return input;
     }
 
     /**
