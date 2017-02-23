@@ -132,14 +132,19 @@ public class Game{
      */
     public Job updateJob(int index, int duration){
         //TODO: As per instructions in comments
-    	 if(duration > timeToPlay){
-    		 timeToPlay = duration;
-    	 }
-    	 Job getJob = list.get(index); 
+    	 
+    	  
+    	 Job getJob = list.remove(index); 
+    	 if(getJob.getTimeUnits() <= duration)
+    		 getJob.setSteps(getJob.getTimeUnits());
+    	 else 
+    		 getJob.setSteps(duration);
+    	 
     	 if(getJob.isCompleted()){
     		 scoreBoard.updateScoreBoard(getJob);
+    		 return null;
     	 }
-    	 
+    	  
     	 int time = getJob.getTimeUnits();
     	 int penalty = time - duration;
     	 if(penalty > 0){
@@ -162,11 +167,12 @@ public class Game{
      */
     public void displayActiveJobs(){
         //TODO: Display all the active jobs
-    	Job getJob = new Job();
     	
+  
     	System.out.println("Job Listing");
-    	System.out.println(" At position: " + getJob.toString());
-
+    	for(int i = 0; i < list.size(); i++)
+    	System.out.println(" At position: " + i + " "+ list.get(i).toString());
+    	System.out.println("");
     }
 
     /**

@@ -13,6 +13,8 @@ public class GameApp{
      */
     public GameApp(int seed, int timeToPlay){
         //TODO: Create a new instance of Game class
+    	Game game = new Game(seed,timeToPlay);
+    	
     }
 
     /**
@@ -26,8 +28,21 @@ public class GameApp{
     public static void main(String[] args){
 
         System.out.println("Welcome to the Job Market!");
-
+      
         //TODO: Take input from command line, process it and add error checking
+        int seed = Integer.parseInt(args[0]);
+        int timeToPlay = Integer.parseInt(args[1]);
+        GameApp gameApp = new GameApp(seed,timeToPlay);
+        
+        System.out.println("You have" + timeToPlay + "left in the game!");
+        
+        
+        
+        
+        
+        
+        
+        
         //TODO: Call the start() method to start playing the game
     }
 
