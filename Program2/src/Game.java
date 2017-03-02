@@ -133,28 +133,30 @@ public class Game{
     public Job updateJob(int index, int duration){
         //TODO: As per instructions in comments
     	 
-    	  
-    	 Job getJob = list.remove(index); 
-    	 if(getJob.getTimeUnits() <= duration)
-    		 getJob.setSteps(getJob.getTimeUnits());
-    	 else 
-    		 getJob.setSteps(duration);
+    	timeToPlay -= duration; //time consumed for the job
+    	if(index != 0){
+    		timeToPlay -= index; //deduct time for penalty 
+    	}
+    	Job job = list.remove(index);
+    	if((job.getTimeUnits() - job.getSteps()) < duration){
+    		timeToPlay += duration - (job.getTimeUnits() - job.getSteps()); //add back the unused time 
+    		job.setSteps(job.getTimeUnits());
+    		
+    	}
+    	else{
+    		job.setSteps(job.getSteps() + duration);
+    	}
+    	
+    	//update the score board if the job is completed
+    	if(job.isCompleted()){
+    		scoreBoard.updateScoreBoard(job);
+    	}
+    	else{
+    		return job;
+    	}
+    	
+      
     	 
-    	 if(getJob.isCompleted()){
-    		 scoreBoard.updateScoreBoard(getJob);
-    		 return null;
-    	 }
-    	  
-    	 int time = getJob.getTimeUnits();
-    	 int penalty = time - duration;
-    	 if(penalty > 0){
-    		 timeToPlay = timeToPlay - penalty - time; 
-    	 }
-    	 else{
-    		 timeToPlay = time;
-    	 }
-    	 
-        return getJob;
     }
 
     /**
