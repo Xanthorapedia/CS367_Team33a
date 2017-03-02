@@ -151,9 +151,8 @@ public class Game{
     	if(job.isCompleted()){
     		scoreBoard.updateScoreBoard(job);
     	}
-    	else{
     		return job;
-    	}
+    	
     	
       
     	 
