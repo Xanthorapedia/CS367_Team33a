@@ -108,7 +108,7 @@ public class JobList implements ListADT<Job> {
 		}
 		Job item = curr.getNext().getData();
 		curr.setNext(curr.getNext().getNext());
-
+		numItems--;
 
 		return item;
 	}

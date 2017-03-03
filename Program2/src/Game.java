@@ -28,7 +28,7 @@ public class Game{
      */
     public Game(int seed, int timeToPlay){
         this.scoreBoard = new Scoreboard();
-        this.timeToPlay = 0; 
+        this.timeToPlay = timeToPlay; 
         this.jobSimulator = new JobSimulator(seed);
         this.list = new JobList();
     }
@@ -133,29 +133,24 @@ public class Game{
     public Job updateJob(int index, int duration){
         //TODO: As per instructions in comments
     	 
-    	timeToPlay -= duration; //time consumed for the job
-    	if(index != 0){
+    	if(index != 0)
     		timeToPlay -= index; //deduct time for penalty 
-    	}
     	Job job = list.remove(index);
-    	if((job.getTimeUnits() - job.getSteps()) < duration){
-    		timeToPlay += duration - (job.getTimeUnits() - job.getSteps()); //add back the unused time 
-    		job.setSteps(job.getTimeUnits());
-    		
-    	}
-    	else{
-    		job.setSteps(job.getSteps() + duration);
-    	}
+    	
+    	int stepsRemaining = job.getTimeUnits() - job.getSteps();
+    	// the actual time used to work on the job
+    	int timeWorked = (stepsRemaining > duration) ? duration : stepsRemaining;
+    	job.setSteps(job.getSteps() + timeWorked);
+    	
+    	timeToPlay -= timeWorked;
     	
     	//update the score board if the job is completed
     	if(job.isCompleted()){
     		scoreBoard.updateScoreBoard(job);
+    		return null;
     	}
-    		return job;
-    	
-    	
-      
-    	 
+    	else
+    		return job; 
     }
 
     /**
