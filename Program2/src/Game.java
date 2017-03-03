@@ -1,4 +1,4 @@
-/*
+/**
  * @author Meredith Lou
  */
 
@@ -26,7 +26,7 @@ public class Game {
 	 */
 	public Game(int seed, int timeToPlay) {
 		this.scoreBoard = new Scoreboard();
-		this.timeToPlay = 0;
+		this.timeToPlay = timeToPlay;
 		this.jobSimulator = new JobSimulator(seed);
 		this.list = new JobList();
 	}
@@ -37,7 +37,6 @@ public class Game {
 	 * @returns the amount of time left in the game.
 	 */
 	public int getTimeToPlay() {
-		// TODO: return the amount of time left
 		return timeToPlay;
 	}
 
@@ -59,7 +58,6 @@ public class Game {
 	 *          equal to 0, else returns false
 	 */
 	public boolean isOver() {
-		// TODO: check if the game is over or not
 		return timeToPlay <= 0;
 	}
 
@@ -68,7 +66,6 @@ public class Game {
 	 * object.
 	 */
 	public void createJobs() {
-		// TODO: Invoke the simulator to create jobs
 		jobSimulator.simulateJobs(list, timeToPlay);
 
 	}
@@ -77,7 +74,6 @@ public class Game {
 	 * @returns the length of the Joblist.
 	 */
 	public int getNumberOfJobs() {
-		// TODO: Get the number of jobs in the JobList
 		return list.size();
 	}
 
@@ -92,11 +88,9 @@ public class Game {
 	 *            The job to be inserted in the list.
 	 */
 	public void addJob(int pos, Job item) {
-		/**
-		 * TODO: Add a job in the list based on position
-		 */
 		list.add(pos, item);
-		this.timeToPlay = timeToPlay - pos;
+		// penalty for not inserting at 0
+		timeToPlay -= pos;
 	}
 
 	/**
@@ -106,7 +100,6 @@ public class Game {
 	 *            The job to be inserted in the list.
 	 */
 	public void addJob(Job item) {
-		// TODO: Add a job in the joblist
 		list.add(item);
 	}
 
@@ -130,15 +123,15 @@ public class Game {
 	 *            The amount of time the given job is to be worked on for.
 	 */
     public Job updateJob(int index, int duration){
-        //TODO: As per instructions in comments
-    	 
-    	if(index != 0)
-    		timeToPlay -= index; //deduct time for penalty 
+    	// penalty for not choosing 0
+    	timeToPlay -= index;
     	Job job = list.remove(index);
     	
     	int stepsRemaining = job.getTimeUnits() - job.getSteps();
+    	// duration is the smaller of the time remaining and the input time
+    	duration = Integer.min(timeToPlay, duration);
     	// the actual time used to work on the job
-    	int timeWorked = (stepsRemaining > duration) ? duration : stepsRemaining;
+    	int timeWorked = Integer.min(stepsRemaining, duration);
     	job.setSteps(job.getSteps() + timeWorked);
     	
     	timeToPlay -= timeWorked;
@@ -158,11 +151,13 @@ public class Game {
 	 *
 	 */
 	public void displayActiveJobs() {
-		// TODO: Display all the active jobs
 
 		System.out.println("Job Listing");
-		for (int i = 0; i < list.size(); i++)
-			System.out.println(" At position: " + i + " " + list.get(i).toString());
+		int i = 0;
+		for (Job job : list) {
+			System.out.println("At position: " + i + " " + job);
+			i++;
+		}
 		System.out.println("");
 	}
 
@@ -171,7 +166,6 @@ public class Game {
 	 * ScoreBoard class.
 	 */
 	public void displayCompletedJobs() {
-		// TODO: Display all the completed jobs
 		scoreBoard.displayScoreBoard();
 	}
 
@@ -182,7 +176,6 @@ public class Game {
 	 * @return the value calculated by getTotalScore
 	 */
 	public int getTotalScore() {
-		// TODO: Return the total score accumulated
 		return scoreBoard.getTotalScore();
 	}
 

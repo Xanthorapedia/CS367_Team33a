@@ -78,7 +78,7 @@ public class JobList implements ListADT<Job> {
 			throw new IllegalArgumentException();
 		}
 
-		if (pos < 0 || pos >= numItems) {
+		if (pos < 0 || pos > numItems) {
 			throw new IndexOutOfBoundsException();
 		}
 

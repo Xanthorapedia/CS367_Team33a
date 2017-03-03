@@ -5,6 +5,7 @@ public class GameApp {
 	 * Scanner instance for reading input from console
 	 */
 	private static final Scanner STDIN = new Scanner(System.in);
+	/** the Game instance of the app*/
 	private Game game;
 
 	/**
@@ -16,7 +17,6 @@ public class GameApp {
 	 *            Total time to play from command line
 	 */
 	public GameApp(int seed, int timeToPlay) {
-		// TODO: Create a new instance of Game class
 		game = new Game(seed, timeToPlay);
 
 	}
@@ -39,13 +39,6 @@ public class GameApp {
 		GameApp gameApp = new GameApp(seed, timeToPlay);
 
 		gameApp.start();
-
-		/* Game Over */
-
-		//System.out.println("Game Over!");
-		// System.out.println("Your final score: " + game.getTotalScore());
-
-		// TODO: Call the start() method to start playing the game
 	}
 
 	/**
@@ -58,25 +51,30 @@ public class GameApp {
 			game.displayActiveJobs();
 			
 			int jobIndex;
-			jobIndex = getIntegerInput("Select a job to work on: ");
-			int jobTime = getIntegerInput("For how long would you like to work on this job?: ");
+			jobIndex = ragedInput("Select a job to work on: ", 0, game.getNumberOfJobs() - 1);
+			int jobTime = ragedInput("For how long would you like to work on this job?: ", 0, Integer.MAX_VALUE);
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
-				int insertJob = readInput("At what position would you like to insert the job back into the list?\n ");
-				game.addJob(jobIndex, job);
+				int insertTo = ragedInput("At what position would you like to insert the job back into the list?\n", 0, game.getNumberOfJobs());
+				game.addJob(insertTo, job);
 	
 			} else {
 				System.out.println("Job completed! Current Score: " + game.getTotalScore());
 				game.displayCompletedJobs();
 			}
 		}
+		System.out.println("Game Over!");
+		System.out.println("Your final score: " + game.getTotalScore());
 	}
 
-	public int readInput(String message, int min, int max) {
+	public int ragedInput(String message, int min, int max) {
 		int input;
-		while (input < min && input > max)
-		input = getIntegerInput(message);
-		
+		while (true) {
+			input = getIntegerInput(message);
+			if (input >= min && input <= max)
+				break;
+			System.out.print("Please enter an integer between " + min + " and " + max + ".\n");
+		}
 
 		return input;
 	}
