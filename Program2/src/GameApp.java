@@ -73,7 +73,10 @@ public class GameApp {
 			input = getIntegerInput(message);
 			if (input >= min && input <= max)
 				break;
-			System.out.print("Please enter an integer between " + min + " and " + max + ".\n");
+			if (max == Integer.MAX_VALUE)
+				System.out.print("Please enter an integer greater than " + min + ".\n");
+			else
+				System.out.print("Please enter an integer between " + min + " and " + max + ".\n");
 		}
 
 		return input;
