@@ -18,15 +18,13 @@
 // Online sources: none.
 //////////////////////////// 80 columns wide //////////////////////////////////
 
-/**
- * This is the main class responsible for starting the program's main loop.
- * It needs two command-line arguments: a seed for a random number gen, and
- * a integer. 
- * The program will stop if either of the arguments are negative. 
- * 
- * 
+ /**
+ * This class is used to keep track of the score board. 
+ * This includes all of the calls to the score board method 
+ * to keep track of score and jobs on the score board as well as 
+ * the amount of timeToPLay left. 
  *
- * @author Meredith Lou, Dasong Gao
+ * @author Meredith Lou
  */
 
 public class Game {
