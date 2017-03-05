@@ -30,9 +30,7 @@ public class GameApp {
 	 *            Command line arguments <seed> <timeToPlay>
 	 */
 	public static void main(String[] args) {
-		System.out.println("Welcome to the Job Market!");
-		
-		args = new String[] {"-5", "50"};
+		args = new String[] {"50", "50"};
 		int seed = -1;
 		int timeToPlay = -1;
 		try {
@@ -60,41 +58,67 @@ public class GameApp {
 	}
 
 	/**
-	 * Add Comments as per implementation
+	 * The method handles the game logic
 	 */
 	private void start() {
+		// opending message
+		System.out.println("Welcome to the Job Market!");
+		
 		while (!game.isOver()) {
-			System.out.println("You have " + game.getTimeToPlay() + " left in the game!");
+			// round heading
+			System.out.println("You have " + game.getTimeToPlay() + 
+					" left in the game!");
 			game.createJobs();
 			game.displayActiveJobs();
 			
-			int jobIndex;
-			jobIndex = ragedInput("Select a job to work on: ", 0, game.getNumberOfJobs() - 1);
-			int jobTime = ragedInput("For how long would you like to work on this job?: ", 0, Integer.MAX_VALUE);
+			// choose job index from 0 to job counts - 1
+			int jobIndex = ragedInput("Select a job to work on: ", 0, 
+					game.getNumberOfJobs() - 1);
+			// time to work on greater than or equal to 0
+			int jobTime = ragedInput("For how long would you like to work on "
+					+ "this job?: ", 0, Integer.MAX_VALUE);
+			
+			// update job
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
-				int insertTo = ragedInput("At what position would you like to insert the job back into the list?\n", 0, game.getNumberOfJobs());
+				int insertTo = ragedInput("At what position would you like to "
+						+ "insert the job back into the list?\n", 0, 
+						game.getNumberOfJobs());
 				game.addJob(insertTo, job);
-	
 			} else {
-				System.out.println("Job completed! Current Score: " + game.getTotalScore());
+				System.out.println("Job completed! Current Score: " + 
+						game.getTotalScore());
 				game.displayCompletedJobs();
 			}
 		}
+		
+		// closing message
 		System.out.println("Game Over!");
 		System.out.println("Your final score: " + game.getTotalScore());
 	}
 
+	/**
+	 * Displays the promt message and returns the integer from std input that
+	 * is in the range [min, max].
+	 * @param message - the prompt message displayed
+	 * @param min - the minimal acceptable value of input
+	 * @param max - the maximal acceptable value of input
+	 * @return a integer between min and max (inclusive)
+	 */
 	private int ragedInput(String message, int min, int max) {
 		int input;
 		while (true) {
 			input = getIntegerInput(message);
 			if (input >= min && input <= max)
 				break;
+			
+			// show different message according to the argument
 			if (max == Integer.MAX_VALUE)
-				System.out.print("Please enter an integer greater than " + min + ".\n");
+				System.out.print("Please enter an integer greater than " + 
+						min + ".\n");
 			else
-				System.out.print("Please enter an integer between " + min + " and " + max + ".\n");
+				System.out.print("Please enter an integer between " + min + 
+						" and " + max + ".\n");
 		}
 
 		return input;

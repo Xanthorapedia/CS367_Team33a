@@ -1,5 +1,5 @@
 /**
- * @author Meredith Lou
+ * @author Meredith Lou, Dasong Gao
  */
 
 public class Game {

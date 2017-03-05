@@ -14,6 +14,9 @@ public class Scoreboard implements ScoreboardADT {
 	/** total score earned*/
 	private int totalScore;
 	
+	/**
+	 * Constructs a scoreboard object.
+	 */
 	public Scoreboard(){
 	    totalScore = 0; 
 	    list = new JobList();
@@ -56,7 +59,7 @@ public class Scoreboard implements ScoreboardADT {
 		for (Job job : list)
 			System.out.println(
 					"Job Name: " + job.getJobName() + "\n" +
-							"Points earned for this job: " + job.getPoints() + "\n" +
+					"Points earned for this job: " + job.getPoints() + "\n" +
 					"--------------------------------------------");
 	}
 
