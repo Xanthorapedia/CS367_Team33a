@@ -19,8 +19,16 @@
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 /**
+ * This is the main class responsible for starting the program's main loop.
+ * It needs two command-line arguments: a seed for a random number gen, and
+ * a integer. 
+ * The program will stop if either of the arguments are negative. 
+ * 
+ * 
+ *
  * @author Meredith Lou, Dasong Gao
  */
+
 public class Game {
 
 	/** A list of all jobs currently in the queue. */
