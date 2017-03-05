@@ -1,17 +1,33 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p2 Welcome to the Job Market
+// FILE:             Game.java
+//
+// TEAM:    team 33
+// Authors: team 33 members
+// Author0: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
+// Author1: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author2: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
+// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author4: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author5: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
+//
+// ---------------- OTHER ASSISTANCE CREDITS 
+// Persons: none.
+// 
+// Online sources: none.
+//////////////////////////// 80 columns wide //////////////////////////////////
+
 /**
  * @author Meredith Lou, Dasong Gao
  */
-
 public class Game {
 
-	/**
-	 * A list of all jobs currently in the queue.
-	 */
+	/** A list of all jobs currently in the queue. */
 	private ListADT<Job> list;
-	/**
-	 * Whenever a Job is completed it is added to the scoreboard
-	 */
+	/** the scoreboard containing completed jobs */
 	private ScoreboardADT scoreBoard;
+	/** the remaining time to play in the game */
 	private int timeToPlay;
 	private JobSimulator jobSimulator;
 
@@ -122,28 +138,28 @@ public class Game {
 	 * @param duration
 	 *            The amount of time the given job is to be worked on for.
 	 */
-    public Job updateJob(int index, int duration){
-    	// penalty for not choosing 0
-    	timeToPlay -= index;
-    	Job job = list.remove(index);
-    	
-    	int stepsRemaining = job.getTimeUnits() - job.getSteps();
-    	// duration is the smaller of the time remaining and the input time
-    	duration = Integer.min(timeToPlay, duration);
-    	// the actual time used to work on the job
-    	int timeWorked = Integer.min(stepsRemaining, duration);
-    	job.setSteps(job.getSteps() + timeWorked);
-    	
-    	timeToPlay -= timeWorked;
-    	
-    	//update the score board if the job is completed
-    	if(job.isCompleted()){
-    		scoreBoard.updateScoreBoard(job);
-    		return null;
-    	}
-    	else
-    		return job; 
-    }
+	public Job updateJob(int index, int duration) {
+		// penalty for not choosing 0
+		timeToPlay -= index;
+		Job job = list.remove(index);
+
+		// steps remaining to complete a Job
+		int stepsRemaining = job.getTimeUnits() - job.getSteps();
+		// in case there is actually no enough time to complete the Job
+		duration = Integer.min(timeToPlay, duration);
+		// the actual time spent on the Job
+		int timeWorked = Integer.min(stepsRemaining, duration);
+		job.setSteps(job.getSteps() + timeWorked);
+
+		timeToPlay -= timeWorked;
+
+		// update the score board if the job is completed
+		if (job.isCompleted()) {
+			scoreBoard.updateScoreBoard(job);
+			return null;
+		} else
+			return job;
+	}
 
 	/**
 	 * This method produces the output for the initial Job Listing, IE: "Job

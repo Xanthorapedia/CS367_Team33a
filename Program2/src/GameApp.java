@@ -1,5 +1,27 @@
-import java.util.Scanner;
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p2 Welcome to the Job Market
+// FILE:             GameApp.java
+//
+// TEAM:    team 33
+// Authors: team 33 members
+// Author0: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
+// Author1: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author2: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
+// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author4: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author5: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
+//
+// ---------------- OTHER ASSISTANCE CREDITS 
+// Persons: none.
+// 
+// Online sources: none.
+//////////////////////////// 80 columns wide //////////////////////////////////
 
+import java.util.Scanner;
+/**
+ * @author Meredith Lou, Dasong Gao
+ */
 public class GameApp {
 	/**
 	 * Scanner instance for reading input from console
@@ -30,9 +52,11 @@ public class GameApp {
 	 *            Command line arguments <seed> <timeToPlay>
 	 */
 	public static void main(String[] args) {
-		args = new String[] {"50", "50"};
+		args = new String[] {"20", "50"};
 		int seed = -1;
 		int timeToPlay = -1;
+		
+		// input check
 		try {
 			seed = Integer.parseInt(args[0]);
 			if (seed < 0) {
@@ -71,18 +95,18 @@ public class GameApp {
 			game.createJobs();
 			game.displayActiveJobs();
 			
-			// choose job index from 0 to job counts - 1
+			// choose job index from 0 to job count - 1
 			int jobIndex = ragedInput("Select a job to work on: ", 0, 
 					game.getNumberOfJobs() - 1);
 			// time to work on greater than or equal to 0
-			int jobTime = ragedInput("For how long would you like to work on "
-					+ "this job?: ", 0, Integer.MAX_VALUE);
+			int jobTime = ragedInput("For how long would you like to work " +
+					"on this job?: ", 0, Integer.MAX_VALUE);
 			
 			// update job
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
-				int insertTo = ragedInput("At what position would you like to "
-						+ "insert the job back into the list?\n", 0, 
+				int insertTo = ragedInput("At what position would you like " + 
+						"to insert the job back into the list?\n", 0, 
 						game.getNumberOfJobs());
 				game.addJob(insertTo, job);
 			} else {
@@ -137,7 +161,8 @@ public class GameApp {
 	public static int getIntegerInput(String prompt) {
 		System.out.print(prompt);
 		while (!STDIN.hasNextInt()) {
-			System.out.print(STDIN.next() + " is not an int.  Please enter an integer.");
+			System.out.print(STDIN.next() + " is not an int. "
+					+ "Please enter an integer.");
 		}
 		return STDIN.nextInt();
 	}
