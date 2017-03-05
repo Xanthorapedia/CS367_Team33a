@@ -24,9 +24,8 @@
  * to keep track of score and jobs on the score board as well as 
  * the amount of timeToPLay left. 
  *
- * @author Meredith Lou
+ * @author Meredith Lou, Sam Ruh, Dasong Gao
  */
-
 public class Game {
 
 	/** A list of all jobs currently in the queue. */

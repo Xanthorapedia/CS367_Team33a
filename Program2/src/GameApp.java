@@ -25,8 +25,7 @@ import java.util.Scanner;
  * a integer. 
  * The program will stop if either of the arguments are negative. 
  * 
- * 
- * @author Meredith Lou, Dasong Gao
+ * @author Meredith Lou, Dasong Gao, Sam Ruh
  */
 public class GameApp {
 	/**
