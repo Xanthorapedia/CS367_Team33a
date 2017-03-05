@@ -105,9 +105,8 @@ public class GameApp {
 			// update job
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
-				int insertTo = ragedInput("At what position would you like " + 
-						"to insert the job back into the list?\n", 
-						Integer.MIN_VALUE, game.getNumberOfJobs());
+				int insertTo = getIntegerInput("At what position would you like " + 
+						"to insert the job back into the list?\n");
 				game.addJob(insertTo, job);
 			} else {
 				System.out.println("Job completed! Current Score: " + 

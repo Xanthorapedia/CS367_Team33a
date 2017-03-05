@@ -104,13 +104,12 @@ public class Game {
 	 *            The job to be inserted in the list.
 	 */
 	public void addJob(int pos, Job item) {
+		// actual inserted position
+		pos = pos < 0 ? list.size() : pos;
 		list.add(pos, item);
 		
 		// time penalty
-		if (pos < 0)
-			timeToPlay -= list.size();
-		else
-			timeToPlay -= pos;
+		timeToPlay -= pos;
 	}
 
 	/**
