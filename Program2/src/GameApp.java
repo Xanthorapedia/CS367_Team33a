@@ -30,14 +30,32 @@ public class GameApp {
 	 *            Command line arguments <seed> <timeToPlay>
 	 */
 	public static void main(String[] args) {
-
 		System.out.println("Welcome to the Job Market!");
-		args = new String[] {"50", "50"};
-		// TODO: Take input from command line, process it and add error checking
-		int seed = Integer.parseInt(args[0]);
-		int timeToPlay = Integer.parseInt(args[1]);
+		
+		args = new String[] {"-5", "50"};
+		int seed = -1;
+		int timeToPlay = -1;
+		try {
+			seed = Integer.parseInt(args[0]);
+			if (seed < 0) {
+				System.out.println("Illegal seed: nagative (" + 
+						seed + ")\nGame terminated.");
+				return;
+			}
+			
+			timeToPlay = Integer.parseInt(args[1]);
+			if (timeToPlay < 0) {
+				System.out.println("Illegal timeToPlay: nagative (" + 
+						timeToPlay + ")\nGame terminated.");
+				return;
+			}
+		} catch (NumberFormatException e) {
+			System.out.println(e.getMessage().split(" ")[3] + 
+					" is not a valid integer.\nGame terminated.");
+			return;
+		}
+		
 		GameApp gameApp = new GameApp(seed, timeToPlay);
-
 		gameApp.start();
 	}
 
@@ -67,7 +85,7 @@ public class GameApp {
 		System.out.println("Your final score: " + game.getTotalScore());
 	}
 
-	public int ragedInput(String message, int min, int max) {
+	private int ragedInput(String message, int min, int max) {
 		int input;
 		while (true) {
 			input = getIntegerInput(message);
