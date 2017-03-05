@@ -106,8 +106,8 @@ public class GameApp {
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
 				int insertTo = ragedInput("At what position would you like " + 
-						"to insert the job back into the list?\n", 0, 
-						game.getNumberOfJobs());
+						"to insert the job back into the list?\n", 
+						Integer.MIN_VALUE, game.getNumberOfJobs());
 				game.addJob(insertTo, job);
 			} else {
 				System.out.println("Job completed! Current Score: " + 
@@ -138,8 +138,11 @@ public class GameApp {
 			
 			// show different message according to the argument
 			if (max == Integer.MAX_VALUE)
-				System.out.print("Please enter an integer greater than " + 
+				System.out.print("Please enter an integer no smaller than " + 
 						min + ".\n");
+			else if (min == Integer.MIN_VALUE)
+				System.out.print("Please enter an integer no greater than " + 
+						max + ".\n");
 			else
 				System.out.print("Please enter an integer between " + min + 
 						" and " + max + ".\n");
