@@ -18,9 +18,15 @@
 // Online sources: none.
 //////////////////////////// 80 columns wide //////////////////////////////////
 
-/**
- * @author Meredith Lou, Dasong Gao
+ /**
+ * This class is used to keep track of the score board. 
+ * This includes all of the calls to the score board method 
+ * to keep track of score and jobs on the score board as well as 
+ * the amount of timeToPLay left. 
+ *
+ * @author Meredith Lou
  */
+
 public class Game {
 
 	/** A list of all jobs currently in the queue. */
