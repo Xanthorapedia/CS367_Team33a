@@ -57,7 +57,7 @@ public class GameApp {
 	 *            Command line arguments <seed> <timeToPlay>
 	 */
 	public static void main(String[] args) {
-		args = new String[] {"20", "50"};
+		args = new String[] {"50", "50"};
 		int seed = -1;
 		int timeToPlay = -1;
 		
@@ -101,17 +101,17 @@ public class GameApp {
 			game.displayActiveJobs();
 			
 			// choose job index from 0 to job count - 1
-			int jobIndex = ragedInput("Select a job to work on: ", 0, 
+			int jobIndex = getIntegerInput("Select a job to work on: ", 0, 
 					game.getNumberOfJobs() - 1);
 			// time to work on greater than or equal to 0
-			int jobTime = ragedInput("For how long would you like to work " +
-					"on this job?: ", 0, Integer.MAX_VALUE);
+			int jobTime = getIntegerInput("For how long would you like to " + 
+					"work on this job?: ", 0, Integer.MAX_VALUE);
 			
 			// update job
 			Job job = game.updateJob(jobIndex, jobTime);
 			if (job != null) {
-				int insertTo = getIntegerInput("At what position would you like " + 
-						"to insert the job back into the list?\n");
+				int insertTo = getIntegerInput("At what position would you " +
+						"like to insert the job back into the list?\n");
 				game.addJob(insertTo, job);
 			} else {
 				System.out.println("Job completed! Current Score: " + 
@@ -133,7 +133,7 @@ public class GameApp {
 	 * @param max - the maximal acceptable value of input
 	 * @return a integer between min and max (inclusive)
 	 */
-	private int ragedInput(String message, int min, int max) {
+	private int getIntegerInput(String message, int min, int max) {
 		int input;
 		while (true) {
 			input = getIntegerInput(message);
