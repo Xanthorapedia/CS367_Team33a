@@ -5,11 +5,11 @@
 //
 // TEAM:    team 33
 // Authors: team 33 members
-// Author0: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
-// Author1: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author0: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author1: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
 // Author2: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
-// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
-// Author4: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author3: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author4: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
 // Author5: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
 //
 // ---------------- OTHER ASSISTANCE CREDITS 
@@ -24,7 +24,7 @@
  * to keep track of score and jobs on the score board as well as 
  * the amount of timeToPLay left. 
  *
- * @author Meredith Lou, Sam Ruh, Dasong Gao
+ * @author Meredith Lou, Maggie Buday, Sam Ruh, Dasong Gao
  */
 public class Game {
 
@@ -34,6 +34,7 @@ public class Game {
 	private ScoreboardADT scoreBoard;
 	/** the remaining time to play in the game */
 	private int timeToPlay;
+	/** the simulator used to generate jobs for the game */
 	private JobSimulator jobSimulator;
 
 	/**
@@ -88,7 +89,6 @@ public class Game {
 	 */
 	public void createJobs() {
 		jobSimulator.simulateJobs(list, timeToPlay);
-
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class Game {
 	 */
 	public void addJob(int pos, Job item) {
 		// actual inserted position
-		pos = pos < 0 ? list.size() : pos;
+		pos = (pos < 0 || pos > list.size()) ? list.size() : pos;
 		list.add(pos, item);
 		
 		// time penalty
@@ -124,7 +124,7 @@ public class Game {
 	 *            The job to be inserted in the list.
 	 */
 	public void addJob(Job item) {
-		list.add(item);
+		addJob(list.size(), item);
 	}
 
 	/**
@@ -162,11 +162,9 @@ public class Game {
 		timeToPlay -= timeWorked;
 
 		// update the score board if the job is completed
-		if (job.isCompleted()) {
+		if (job.isCompleted())
 			scoreBoard.updateScoreBoard(job);
-			return null;
-		} else
-			return job;
+		return job;
 	}
 
 	/**

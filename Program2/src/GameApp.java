@@ -5,11 +5,11 @@
 //
 // TEAM:    team 33
 // Authors: team 33 members
-// Author0: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
-// Author1: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+// Author0: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
+// Author1: Apoorva Dhawan,	dhawan3@wisc.edu,	dhawan3,	lec001
 // Author2: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
-// Author3: Maggie Buday,	Mbuday@wisc.edu,	mbuday,		lec001
-// Author4: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author3: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author4: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
 // Author5: Sam Ruh,		sruh@wisc.edu,		sruh,		lec001
 //
 // ---------------- OTHER ASSISTANCE CREDITS 
@@ -28,11 +28,9 @@ import java.util.Scanner;
  * @author Meredith Lou, Dasong Gao, Sam Ruh
  */
 public class GameApp {
-	/**
-	 * Scanner instance for reading input from console
-	 */
+	/** Scanner instance for reading input from console */
 	private static final Scanner STDIN = new Scanner(System.in);
-	/** the Game instance of the app*/
+	/** the Game instance of the app */
 	private Game game;
 
 	/**
@@ -57,7 +55,11 @@ public class GameApp {
 	 *            Command line arguments <seed> <timeToPlay>
 	 */
 	public static void main(String[] args) {
-		args = new String[] {"50", "50"};
+		if (args.length < 2) {
+			System.out.println("Too few arguments.\nGame terminated.");
+			return;
+		}
+		
 		int seed = -1;
 		int timeToPlay = -1;
 		
@@ -87,7 +89,9 @@ public class GameApp {
 	}
 
 	/**
-	 * The method handles the game logic
+	 * The method handles the game logic including displaying a list of available
+	 * jobs, prompting user to choose a job, updating the job and showing the
+	 * scoreboard. 
 	 */
 	private void start() {
 		// opending message
@@ -109,7 +113,7 @@ public class GameApp {
 			
 			// update job
 			Job job = game.updateJob(jobIndex, jobTime);
-			if (job != null) {
+			if (!job.isCompleted()) {
 				int insertTo = getIntegerInput("At what position would you " +
 						"like to insert the job back into the list?\n");
 				game.addJob(insertTo, job);
