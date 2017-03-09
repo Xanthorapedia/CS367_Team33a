@@ -120,11 +120,11 @@ Task List Usage:
   + output the job list
   
 + Task 11: Write comments and add headers to each of the classes.
-  +B Game
-  +VR GameApp
-  +G JobList
-  +G JobListIterator
-  +G Scoreboard
+  +BD Game
+  +VRD GameApp
+  +GD JobList
+  +GD JobListIterator
+  +GD Scoreboard
 
 + ADD MORE SUB-TASKS TO ANY OF THE ABOVE TASKS
 
