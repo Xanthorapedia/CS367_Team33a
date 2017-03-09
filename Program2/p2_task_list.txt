@@ -69,7 +69,7 @@ Task List Usage:
     + Create a new class named JobList and add stub methods for
       all required methods of the ListADT
     + Add declaration to "implements ListADT<Job>" to this class
-    + implement each method
+    +D implement each method
        + add(item)
        + add(pos,item)
        + remove(pos)
@@ -92,7 +92,7 @@ Task List Usage:
   JobList can return an iterator and that the JobListIterator
   works as expected.
   
-+G Task 6: Write the Scoreboard class so that it implements all
++GD Task 6: Write the Scoreboard class so that it implements all
   required operations of the ScoreboardADT. Review the Game class
   to see how the Scoreboard class is being used.
   
