@@ -42,7 +42,7 @@ abstract class Record {
     abstract public void clear();
 
 	/**
-	 * @eturn a Comparator which can compare two FileLine objects in
+	 * @return a Comparator which can compare two FileLine objects in
 	 * a way that is appropriate for the given application.
 	 */ 
     abstract public Comparator<FileLine> getComparator();
