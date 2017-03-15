@@ -4,15 +4,15 @@ import java.lang.*;
 
 /**
  * Reducer solves the following problem: given a set of sorted input files (each
- * containing the same type of data), merge them into one sorted file. 
+ * containing the same type of data), merge them into one sorted file.
  *
  */
 public class Reducer {
-    // list of files for stocking the PQ
-    private List<FileIterator> fileList;
-    private String type,dirName,outFile;
+	// list of files for stocking the PQ
+	private List<FileIterator> fileList;
+	private String type, dirName, outFile;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		if (args.length != 3) {
 			System.out.println("Usage: java Reducer <weather|thesaurus> <dir_name> <output_file>");
 			System.exit(1);
@@ -24,23 +24,25 @@ public class Reducer {
 
 		Reducer r = new Reducer(type, dirName, outFile);
 		r.run();
-	
-    }
+
+	}
 
 	/**
-	 * Constructs a new instance of Reducer with the given type (a string indicating which type of data is being merged),
-	 * the directory which contains the files to be merged, and the name of the output file.
+	 * Constructs a new instance of Reducer with the given type (a string
+	 * indicating which type of data is being merged), the directory which
+	 * contains the files to be merged, and the name of the output file.
 	 */
-    public Reducer(String type, String dirName, String outFile) {
+	public Reducer(String type, String dirName, String outFile) {
 		this.type = type;
 		this.dirName = dirName;
 		this.outFile = outFile;
-    }
+	}
 
 	/**
-	 * Carries out the file merging algorithm described in the assignment description. 
+	 * Carries out the file merging algorithm described in the assignment
+	 * description.
 	 */
-    public void run() {
+	public void run() {
 		File dir = new File(dirName);
 		File[] files = dir.listFiles();
 		Arrays.sort(files);
@@ -50,9 +52,9 @@ public class Reducer {
 		// list of files for stocking the PQ
 		fileList = new ArrayList<FileIterator>();
 
-		for(int i = 0; i < files.length; i++) {
+		for (int i = 0; i < files.length; i++) {
 			File f = files[i];
-			if(f.isFile() && f.getName().endsWith(".txt")) {
+			if (f.isFile() && f.getName().endsWith(".txt")) {
 				fileList.add(new FileIterator(f.getAbsolutePath(), i));
 			}
 		}
@@ -69,6 +71,35 @@ public class Reducer {
 			System.exit(1);
 		}
 
-		// TODO
-    }
+		FileLinePriorityQueue q = new FileLinePriorityQueue(fileList.size(), r.getComparator());
+		try {
+			for (int i = 0; i < fileList.size(); i++) {
+				q.insert(fileList.get(i).next());
+			}
+			FileWriter w = new FileWriter(outFile);
+			while (!q.isEmpty()) {
+				FileLine tmp = q.removeMin();
+				if (r.toString().equals("[]") || r.toString().equals(q)) { // should split q and r then compara Key 
+					r.join(tmp);
+				}
+				else {
+					w.write(r.toString()); //write the what in record to outFile
+					r.clear();
+				}
+				
+				if (tmp.getFileIterator().hasNext()){
+					q.insert(tmp.getFileIterator().next());
+				}
+			}
+			// w.write(str, off, len); write the contents left in Record
+			w.close();
+		} catch (PriorityQueueEmptyException e) {
+			System.out.println("PriorityQueueEmptyException");
+		} catch (PriorityQueueFullException e) {
+			System.out.println("PriorityQueueFullException");
+		} catch (IOException e){
+			System.out.println("IOException");
+		}
+
+	}
 }
