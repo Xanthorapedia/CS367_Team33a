@@ -62,9 +62,12 @@ public class ThesaurusRecord extends Record{
     public void join(FileLine w) {
     	data = new String[w.getString().length()];
     	list = new ArrayList<String>();
-
+        String str = null;
 		for(int i = 0; i < w.getString().length(); i++){
-			data = w.getString().split(",");
+			str = w.getString().replaceAll(":",",");
+		}
+		for(int i = 0; i < w.getString().length(); i++){
+			data = str.split(",");
 		}
 		
 		for(int j = 0; j < data.length; j++){
