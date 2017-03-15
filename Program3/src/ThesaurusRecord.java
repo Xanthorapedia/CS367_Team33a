@@ -54,7 +54,7 @@ public class ThesaurusRecord extends Record {
 	 */
 	public void clear() {
 		list = new ArrayList<String>();
-		word = null;
+		word = "";
 	}
 
 	/**
@@ -88,7 +88,8 @@ public class ThesaurusRecord extends Record {
 		String str = word + ":";
 		for (int i = 0; i < list.size() - 1; i++)
 			str += list.get(i) + ",";
-		str += list.get(list.size() - 1);
+		if (list.size() != 0)
+			str += list.get(list.size() - 1);
 		return str;
 	}
 }
