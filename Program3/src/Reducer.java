@@ -73,25 +73,28 @@ public class Reducer {
 
 		FileLinePriorityQueue q = new FileLinePriorityQueue(fileList.size(), r.getComparator());
 		try {
-			for (int i = 0; i < fileList.size(); i++) {
+			// first-round fill
+			for (int i = 0; i < fileList.size(); i++)
 				q.insert(fileList.get(i).next());
-			}
 			FileWriter w = new FileWriter(outFile);
+			
+			// the previous key
+			String prevKey = "";
 			while (!q.isEmpty()) {
 				FileLine tmp = q.removeMin();
-				if (r.toString().equals("[]") || r.toString().equals(q)) { // should split q and r then compara Key 
-					r.join(tmp);
-				}
-				else {
-					w.write(r.toString()); //write the what in record to outFile
+				String thisKey = getKey(tmp.getString());
+				// if is a different key but not the first time
+				if (!thisKey.equals(prevKey) && !prevKey.equals("")) {
+					//write the what in record to outFile, clear and update key
+					w.write(r.toString());
 					r.clear();
 				}
+				prevKey = thisKey;
+				r.join(tmp);
 				
-				if (tmp.getFileIterator().hasNext()){
+				if (tmp.getFileIterator().hasNext())
 					q.insert(tmp.getFileIterator().next());
-				}
 			}
-			// w.write(str, off, len); write the contents left in Record
 			w.close();
 		} catch (PriorityQueueEmptyException e) {
 			System.out.println("PriorityQueueEmptyException");
@@ -101,5 +104,18 @@ public class Reducer {
 			System.out.println("IOException");
 		}
 
+	}
+	
+	/**
+	 * Gets the key of the String record. Before the last ',' for whether data
+	 * or before the last ':' for thesaurus data
+	 * @param str the record String
+	 * @return the key of the record
+	 */
+	private String getKey(String str) {
+		if (type.equals("weather"))
+			return str.substring(0, str.lastIndexOf(','));
+		else
+			return str.substring(0, str.lastIndexOf(':'));
 	}
 }
