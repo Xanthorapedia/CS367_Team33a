@@ -91,7 +91,7 @@ public class Reducer {
 					q.insert(tmp.getFileIterator().next());
 				}
 			}
-			// w.write(str, off, len); write the contents left in record
+			// w.write(str, off, len); write the contents left in Record
 			w.close();
 		} catch (PriorityQueueEmptyException e) {
 			System.out.println("PriorityQueueEmptyException");
