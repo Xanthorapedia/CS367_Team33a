@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -6,8 +9,9 @@ import java.util.Comparator;
  * l stores the weather readings, in the same order as the files from which they came are indexed.
  */
 public class WeatherRecord extends Record{
-    // TODO declare data structures required
-
+    String[] data;
+    ArrayList<Double> list;
+   
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
 	 * and then calling the clear method()
@@ -23,9 +27,8 @@ public class WeatherRecord extends Record{
 	 */
     private class WeatherLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			// TODO implement compare() functionality
 			
-			return 0;
+			return  l1.getString().compareTo(l2.getString());
 		}
 		
 		public boolean equals(Object o) {
@@ -43,7 +46,7 @@ public class WeatherRecord extends Record{
 	
 	/**
 	 * This method should fill each entry in the data structure containing
-	 * the readings with Double.MIN_VALUE
+	 * the readings with Double.MIN_VALUEsp
 	 */
     public void clear() {
 		// TODO initialize/reset data members
@@ -57,7 +60,19 @@ public class WeatherRecord extends Record{
 	 * WeatherRecord should be set to the station and date values which were similarly parsed.
 	 */
     public void join(FileLine li) {
-		// TODO implement join() functionality
+    	data = new String[li.getString().length()];
+    	list = new ArrayList<Double>();
+
+		for(int i = 0; i < li.getString().length(); i++){
+			data = li.getString().split(",");
+		}
+		
+		for(int j = 0; j < data.length; j++){
+			list.add(Double.parseDouble(data[j]));
+		}
+		Collections.sort(list); //sort the list in order
+		
+		
     }
 	
 	/**

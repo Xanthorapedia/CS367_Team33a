@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -5,7 +7,10 @@ import java.util.Comparator;
  */
 
 public class ThesaurusRecord extends Record{
-    // TODO declare data structures required
+     ArrayList<String> list;
+     String[] data;
+     String word;
+     
 
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent constructor
@@ -24,9 +29,7 @@ public class ThesaurusRecord extends Record{
 	 */
 	private class ThesaurusLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			// TODO implement compare() functionality
-
-			return 0;
+			return l1.getString().compareTo(l2.getString());
 		}
 		
 		public boolean equals(Object o) {
@@ -45,7 +48,11 @@ public class ThesaurusRecord extends Record{
 	 * This method should (1) set the word to null and (2) empty the list of synonyms.
 	 */
     public void clear() {
-		// TODO initialize/reset data members
+		
+    	list = new ArrayList<String>();
+    	word = null;
+    	list.clear();
+    	
     }
 	
 	/**
@@ -53,14 +60,28 @@ public class ThesaurusRecord extends Record{
 	 * which are not already found in this ThesaurusRecord's list of synonyms.
 	 */
     public void join(FileLine w) {
-		// TODO implement join() functionality
+    	data = new String[w.getString().length()];
+    	list = new ArrayList<String>();
+
+		for(int i = 0; i < w.getString().length(); i++){
+			data = w.getString().split(",");
+		}
+		
+		for(int j = 0; j < data.length; j++){
+			if(!data[j].equalsIgnoreCase(data[j+1]))
+			list.add(data[j]);
+			
+		}
+		
+		Collections.sort(list); //sort the list in order
+    	
     }
 	
 	/**
 	 * See the assignment description and example runs for the exact output format.
 	 */
     public String toString() {
-		// TODO
+	
 		return null;
 	}
 }
