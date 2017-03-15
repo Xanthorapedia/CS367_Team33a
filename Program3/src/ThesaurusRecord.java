@@ -68,7 +68,9 @@ public class ThesaurusRecord extends Record{
 		}
 		
 		for(int j = 0; j < data.length; j++){
+			if(!data[j].equalsIgnoreCase(data[j+1]))
 			list.add(data[j]);
+			
 		}
 		
 		Collections.sort(list); //sort the list in order
