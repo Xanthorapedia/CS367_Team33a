@@ -83,13 +83,13 @@ public class Reducer {
 			while (!q.isEmpty()) {
 				FileLine tmp = q.removeMin();
 				String thisKey = getKey(tmp.getString());
-				// if is new key
-				if (!thisKey.equals(prevKey)) {
+				// if is a different key but not the first time
+				if (!thisKey.equals(prevKey) && !prevKey.equals("")) {
 					//write the what in record to outFile, clear and update key
 					w.write(r.toString());
 					r.clear();
-					prevKey = thisKey;
 				}
+				prevKey = thisKey;
 				r.join(tmp);
 				
 				if (tmp.getFileIterator().hasNext())
