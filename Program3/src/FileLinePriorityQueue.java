@@ -48,8 +48,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		
 		// heapify till the top
 		int cur = itemCount;
-		while (reheapify(cur) > 0)
-			cur /= 2;
+		while (reheapify(cur /= 2) > 0);
     }
 
     public boolean isEmpty() {
@@ -74,6 +73,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
      * @return next index to be altered, 0 if done
      */
     private int reheapify(int parent) {
+    	// cannot reheapify 0
+    	if (parent == 0)
+    		return 0;
+    	
     	int lChild = parent * 2;
     	int rChild = parent * 2 + 1;
     	int next = 0;

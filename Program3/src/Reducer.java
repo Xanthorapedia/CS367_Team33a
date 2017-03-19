@@ -95,6 +95,10 @@ public class Reducer {
 				if (tmp.getFileIterator().hasNext())
 					q.insert(tmp.getFileIterator().next());
 			}
+			// special treatment for the last record
+			w.write(r.toString());
+			r.clear();
+			
 			w.close();
 		} catch (PriorityQueueEmptyException e) {
 			System.out.println("PriorityQueueEmptyException");

@@ -9,7 +9,7 @@ import java.util.Comparator;
 
 public class ThesaurusRecord extends Record {
 	private ArrayList<String> list;
-	private String word;
+	private String key;
 
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent
@@ -54,7 +54,7 @@ public class ThesaurusRecord extends Record {
 	 */
 	public void clear() {
 		list = new ArrayList<String>();
-		word = "";
+		key = "";
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ThesaurusRecord extends Record {
 		String str = w.getString();
 		int colPos = str.indexOf(':');
 
-		word = str.substring(0, colPos);
+		key = str.substring(0, colPos);
 		str = str.substring(colPos + 1);
 
 		// add new Strings
@@ -85,7 +85,7 @@ public class ThesaurusRecord extends Record {
 	 * format.
 	 */
 	public String toString() {
-		String str = word + ":";
+		String str = key + ":";
 		for (int i = 0; i < list.size() - 1; i++)
 			str += list.get(i) + ",";
 		if (list.size() != 0)

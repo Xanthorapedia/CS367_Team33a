@@ -10,7 +10,8 @@ import java.util.Comparator;
  */
 public class WeatherRecord extends Record{
 
-	ArrayList<String> list;
+	ArrayList<Double> list;
+	String key;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
@@ -27,24 +28,11 @@ public class WeatherRecord extends Record{
 	 */
 	private class WeatherLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			int compare = 0;
-			//compare the stations
-			String str1 = l1.getString();
-			str1 = str1.substring(0, str1.indexOf(','));
-			String str2 = l2.getString();
-			str2 = str2.substring(0, str2.indexOf(','));
-
-			//if the stations are the same, compare the dates
-			if(str1.equals(str2)){
-				String[] date1 = l1.getString().split(",");
-				String[] date2 = l2.getString().split(",");
-				String d1 = date1[1];
-				String d2 = date2[1];
-				compare = d1.compareTo(d2);
-
-			}
-			return compare;
-
+			String[] data = l1.getString().split(",");
+			String key1 = data[0] + "," + data[1];
+			data = l2.getString().split(",");
+			String key2 = data[0] + "," + data[1];
+			return key1.compareTo(key2);
 		}
 
 		public boolean equals(Object o) {
@@ -65,10 +53,10 @@ public class WeatherRecord extends Record{
 	 * the readings with Double.MIN_VALUEsp
 	 */
 	public void clear() {
-		list = new ArrayList<String>();
-		for(int i =0; i < list.size(); i++){
-			list.add(Double.toString(Double.MIN_VALUE));
-		}
+		list = new ArrayList<Double>();
+		for(int i =0; i < this.getNumFiles(); i++)
+			list.add(Double.MIN_VALUE);
+		key = "";
 	}
 
 	/**
@@ -80,24 +68,23 @@ public class WeatherRecord extends Record{
 	 */
 	public void join(FileLine li) {
 		String[] data = li.getString().split(",");
-		for(int j = 0; j < data.length; j++){
-			//if the index is an empty, replace with "-"
-			if(data[j] == "")
-			data[j] = "-";
-			list.add(data[j]);
-		}
-		Collections.sort(list); //sort the list in order
-
-
+		key = data[0] + "," + data[1];
+		int index = li.getFileIterator().getIndex();
+		
+		while(list.size() <= index)
+			list.add(Double.MIN_VALUE);
+		
+		list.set(index, Double.parseDouble(data[2]));
 	}
 
 	/**
 	 * See the assignment description and example runs for the exact output format.
 	 */
 	public String toString() {
-		String str = "";
-		for (int i = 0; i < list.size() - 1; i++)
-			str += list.get(i) + ",";
+		String str = key;
+		for (int i = 0; i < list.size(); i++)
+			str += "," + (list.get(i) == Double.MIN_VALUE ? "-" : list.get(i));
+		str += "\n";
 		return str;
 	}
 }
