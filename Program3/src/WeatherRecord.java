@@ -1,3 +1,19 @@
+/////////////////////////////////////////////////////////////////////////////
+// Semester:         CS367 Spring 2017
+// PROJECT:          p3 Memory Efficient Merging of Sorted Files
+// FILE:             WeatherRecord.java
+//
+// TEAM:    team 33a
+// Authors: team 33a members
+// Author0: Dasong Gao,		dgao24@wisc.edu,	dgao24,		lec001
+// Author1: Meredith Lou,	ylou9@wisc.edu,		ylou9,		lec001
+// Author2: Bobby Lv,		zlv7@wisc.edu,		zlv7,		lec001
+//
+// ---------------- OTHER ASSISTANCE CREDITS 
+// Persons: none.
+// 
+// Online sources: none.
+//////////////////////////// 80 columns wide //////////////////////////////////
 
 import java.util.ArrayList;
 import java.util.Comparator;
