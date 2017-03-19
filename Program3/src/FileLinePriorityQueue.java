@@ -6,6 +6,7 @@ import java.util.Comparator;
  *
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
+	
     /** the comparator for comparing lines */
     private Comparator<FileLine> cmp;
     /** the max size of the queue */
@@ -15,11 +16,11 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     /** element count */
     private int itemCount;
     
-//TODO file header
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
 		
+		// 0 is not used
 		lines = new FileLine[maxSize + 1];
 		itemCount = 0;
     }

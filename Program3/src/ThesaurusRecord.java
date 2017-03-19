@@ -8,7 +8,10 @@ import java.util.Comparator;
  */
 
 public class ThesaurusRecord extends Record {
+	
+	/** the thesaurus record */
 	private ArrayList<String> list;
+	/** the key (line header) of the record */
 	private String key;
 
 	/**
@@ -28,11 +31,12 @@ public class ThesaurusRecord extends Record {
 	 */
 	private class ThesaurusLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			String str1 = l1.getString();
-			str1 = str1.substring(0, str1.indexOf(':'));
-			String str2 = l2.getString();
-			str2 = str2.substring(0, str2.indexOf(':'));
-			return str1.compareTo(str2);
+			// gets the key of each of the 
+			String key1 = l1.getString();
+			key1 = key1.substring(0, key1.indexOf(':'));
+			String key2 = l2.getString();
+			key2 = key2.substring(0, key2.indexOf(':'));
+			return key2.compareTo(key2);
 		}
 
 		public boolean equals(Object o) {
