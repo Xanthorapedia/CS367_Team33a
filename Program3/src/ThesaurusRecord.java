@@ -52,7 +52,7 @@ public class ThesaurusRecord extends Record {
 			key1 = key1.substring(0, key1.indexOf(':'));
 			String key2 = l2.getString();
 			key2 = key2.substring(0, key2.indexOf(':'));
-			return key2.compareTo(key2);
+			return key1.compareTo(key2);
 		}
 
 		public boolean equals(Object o) {

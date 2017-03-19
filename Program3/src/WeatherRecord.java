@@ -15,7 +15,6 @@
 // Online sources: none.
 //////////////////////////// 80 columns wide //////////////////////////////////
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -26,8 +25,8 @@ import java.util.Comparator;
  */
 public class WeatherRecord extends Record{
 
-	/** the weather reading */
-	ArrayList<Double> list;
+	/** the weather readings */
+	double[] list;
 	/** the key (<station>,<data>) of the record */
 	String key;
 
@@ -72,9 +71,9 @@ public class WeatherRecord extends Record{
 	 * the readings with Double.MIN_VALUEsp
 	 */
 	public void clear() {
-		list = new ArrayList<Double>();
-		for(int i =0; i < this.getNumFiles(); i++)
-			list.add(Double.MIN_VALUE);
+		list = new double[this.getNumFiles()];
+		for(int i = 0; i < this.getNumFiles(); i++)
+			list[i] = Double.MIN_VALUE;
 		key = "";
 	}
 
@@ -95,11 +94,7 @@ public class WeatherRecord extends Record{
 		// the index on which the FileLine will join the list
 		int index = li.getFileIterator().getIndex();
 		
-		// fill the line with if there is not enough place for the new FileLine
-		while(list.size() <= index)
-			list.add(Double.MIN_VALUE);
-		
-		list.set(index, Double.parseDouble(data[2]));
+		list[index] = Double.parseDouble(data[2]);
 	}
 
 	/**
@@ -108,8 +103,8 @@ public class WeatherRecord extends Record{
 	public String toString() {
 		String str = key;
 		// replace MIN_VALUE with "-"
-		for (int i = 0; i < list.size(); i++)
-			str += "," + (list.get(i) == Double.MIN_VALUE ? "-" : list.get(i));
+		for (int i = 0; i < list.length; i++)
+			str += "," + (list[i] == Double.MIN_VALUE ? "-" : list[i]);
 		str += "\n";
 		return str;
 	}
