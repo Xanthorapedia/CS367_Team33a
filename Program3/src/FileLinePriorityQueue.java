@@ -48,7 +48,8 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		
 		// heapify till the top
 		int cur = itemCount;
-		while (reheapify(cur /= 2) > 0);
+		while (reheapify(cur) > 0)
+			cur /= 2;
     }
 
     public boolean isEmpty() {

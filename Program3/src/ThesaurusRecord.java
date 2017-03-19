@@ -67,7 +67,7 @@ public class ThesaurusRecord extends Record {
 		int colPos = str.indexOf(':');
 
 		word = str.substring(0, colPos);
-		str = str.substring(colPos);
+		str = str.substring(colPos + 1);
 
 		// add new Strings
 		String[] data = str.split(",");
@@ -90,6 +90,7 @@ public class ThesaurusRecord extends Record {
 			str += list.get(i) + ",";
 		if (list.size() != 0)
 			str += list.get(list.size() - 1);
+		str += "\n";
 		return str;
 	}
 }

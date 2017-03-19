@@ -1,0 +1,2 @@
+bad:lamentable,naughty,rotten,sorry,unfavorable
+good:acceptable,favorable,not bad,peachy,quality,satisfactory
