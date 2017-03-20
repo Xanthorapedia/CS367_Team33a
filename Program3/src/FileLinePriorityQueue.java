@@ -51,12 +51,12 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		if (itemCount == 0)
 			throw new PriorityQueueEmptyException();
 		
-		// returned line
+		// record returned line, takes the tail to the front and set old to null
 		FileLine ret = lines[1];
 		swap(1, itemCount);
 		lines[itemCount--] = null;
 		
-		// heapify till the end
+		// heapify until nothing to change
 		int cur = 1;
 		while ((cur = reheapify(cur)) > 0);
 
@@ -69,7 +69,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		
 		lines[++itemCount] = fl;
 		
-		// heapify till the top
+		// heapify until nothing to change
 		int cur = itemCount;
 		while (reheapify(cur /= 2) > 0);
     }
@@ -93,7 +93,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
      * Compare the parent at index with its children to adjust the three ndoes
      * so that parent <= lchild <= rchild
      * @param parent the index of the parent
-     * @return next index to be altered, 0 if done
+     * @return next index to be adjusted, 0 if all done
      */
     private int reheapify(int parent) {
     	// cannot reheapify 0

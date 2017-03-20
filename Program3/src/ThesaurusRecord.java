@@ -49,7 +49,7 @@ public class ThesaurusRecord extends Record {
 	 */
 	private class ThesaurusLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			// gets the key of each of the 
+			// gets the key of each of the FileLines
 			String key1 = l1.getString();
 			key1 = key1.substring(0, key1.indexOf(':'));
 			String key2 = l2.getString();
@@ -90,10 +90,11 @@ public class ThesaurusRecord extends Record {
 		String str = w.getString();
 		int colPos = str.indexOf(':');
 
+		// breaks the string at ':', parse the rest
 		key = str.substring(0, colPos);
 		str = str.substring(colPos + 1);
 
-		// add new Strings
+		// only add new Strings
 		String[] data = str.split(",");
 		for (String tmp : data)
 			if (!list.contains(tmp))
@@ -109,6 +110,8 @@ public class ThesaurusRecord extends Record {
 	 */
 	public String toString() {
 		String str = key + ":";
+		
+		// prints except for the last item with ","
 		for (int i = 0; i < list.size() - 1; i++)
 			str += list.get(i) + ",";
 		if (list.size() != 0)

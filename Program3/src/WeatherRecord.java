@@ -93,9 +93,9 @@ public class WeatherRecord extends Record{
 	public void join(FileLine li) {
 		String[] data = li.getString().split(",");
 		key = data[0] + "," + data[1];
-		// the index on which the FileLine will join the list
-		int index = li.getFileIterator().getIndex();
 		
+		// the i'th line takes the i'th place in the record
+		int index = li.getFileIterator().getIndex();
 		list[index] = Double.parseDouble(data[2]);
 	}
 
@@ -104,6 +104,7 @@ public class WeatherRecord extends Record{
 	 */
 	public String toString() {
 		String str = key;
+		
 		// replace MIN_VALUE with "-"
 		for (int i = 0; i < list.length; i++)
 			str += "," + (list[i] == Double.MIN_VALUE ? "-" : list[i]);

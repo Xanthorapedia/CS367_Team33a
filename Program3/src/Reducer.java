@@ -118,7 +118,7 @@ public class Reducer {
 				prevKey = thisKey;
 				r.join(removed);
 				
-				// refill
+				// refill if there are lines
 				if (removed.getFileIterator().hasNext())
 					q.insert(removed.getFileIterator().next());
 			}
