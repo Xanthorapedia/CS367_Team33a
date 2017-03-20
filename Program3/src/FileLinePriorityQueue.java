@@ -18,9 +18,9 @@
 import java.util.Comparator;
 
 /**
- * An implementation of the MinPriorityQueueADT interface. This implementation stores FileLine objects.
- * See MinPriorityQueueADT.java for a description of each method. 
- *
+ * An implementation of the MinPriorityQueueADT interface. This implementation 
+ * stores FileLine objects. See MinPriorityQueueADT.java for a description of 
+ * each method. 
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	
@@ -33,6 +33,11 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     /** element count */
     private int itemCount;
     
+    /**
+     * Constructs a FileLinePriorityQueue with a specified size and a Comparator
+     * @param initialSize the initial size of the queue
+     * @param cmp the comparator used to determine the order of FileLines
+     */
     public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;

@@ -24,13 +24,19 @@ import java.util.*;
  *
  */
 public class Reducer {
-	// list of files for stocking the PQ
+	/** list of files for stocking the PQ */
 	private List<FileIterator> fileList;
+	/** the type, directory name and output file name of the reducer */
 	private String type, dirName, outFile;
 
+	/**
+	 * The main method for Reducer
+	 * @param args weather/thesaurus directory output_file
+	 */
 	public static void main(String[] args) {
 		if (args.length != 3) {
-			System.out.println("Usage: java Reducer <weather|thesaurus> <dir_name> <output_file>");
+			System.out.println("Usage: java Reducer <weather|thesaurus> "
+					+ "<dir_name> <output_file>");
 			System.exit(1);
 		}
 
@@ -40,13 +46,16 @@ public class Reducer {
 
 		Reducer r = new Reducer(type, dirName, outFile);
 		r.run();
-
 	}
 
 	/**
 	 * Constructs a new instance of Reducer with the given type (a string
 	 * indicating which type of data is being merged), the directory which
 	 * contains the files to be merged, and the name of the output file.
+	 * 
+	 * @param type the reducer type
+	 * @param dirName the directory name of source file
+	 * @param outFile the output file name
 	 */
 	public Reducer(String type, String dirName, String outFile) {
 		this.type = type;
@@ -87,9 +96,10 @@ public class Reducer {
 			System.exit(1);
 		}
 
-		FileLinePriorityQueue q = new FileLinePriorityQueue(fileList.size(), r.getComparator());
+		FileLinePriorityQueue q = 
+				new FileLinePriorityQueue(fileList.size(), r.getComparator());
 		try {
-			// first-round fill
+			// fill the queue in the first place
 			for (int i = 0; i < fileList.size(); i++)
 				q.insert(fileList.get(i).next());
 			FileWriter w = new FileWriter(outFile);
@@ -97,19 +107,20 @@ public class Reducer {
 			// the previous key
 			String prevKey = "";
 			while (!q.isEmpty()) {
-				FileLine tmp = q.removeMin();
-				String thisKey = getKey(tmp.getString());
+				FileLine removed = q.removeMin();
+				String thisKey = getKey(removed.getString());
 				// if is a different key but not the first time
 				if (!thisKey.equals(prevKey) && !prevKey.equals("")) {
-					//write the what in record to outFile, clear and update key
+					//write the what in record to outFile, and clear record
 					w.write(r.toString());
 					r.clear();
 				}
 				prevKey = thisKey;
-				r.join(tmp);
+				r.join(removed);
 				
-				if (tmp.getFileIterator().hasNext())
-					q.insert(tmp.getFileIterator().next());
+				// refill
+				if (removed.getFileIterator().hasNext())
+					q.insert(removed.getFileIterator().next());
 			}
 			// special treatment for the last record
 			w.write(r.toString());
@@ -123,7 +134,6 @@ public class Reducer {
 		} catch (IOException e){
 			System.out.println("IOException");
 		}
-
 	}
 	
 	/**

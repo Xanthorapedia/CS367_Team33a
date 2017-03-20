@@ -33,6 +33,8 @@ public class ThesaurusRecord extends Record {
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent
 	 * constructor and then calling the clear method()
+	 * 
+	 * @param numFiles the number of files to be merged
 	 */
 	public ThesaurusRecord(int numFiles) {
 		super(numFiles);
@@ -81,6 +83,8 @@ public class ThesaurusRecord extends Record {
 	 * This method should parse the list of synonyms contained in the given
 	 * FileLine and insert any which are not already found in this
 	 * ThesaurusRecord's list of synonyms.
+	 * 
+	 * @param w a line of a input file
 	 */
 	public void join(FileLine w) {
 		String str = w.getString();
@@ -97,7 +101,6 @@ public class ThesaurusRecord extends Record {
 
 		// sort the list in order
 		Collections.sort(list);
-
 	}
 
 	/**

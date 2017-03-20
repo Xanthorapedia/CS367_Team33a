@@ -27,12 +27,14 @@ public class WeatherRecord extends Record{
 
 	/** the weather readings */
 	double[] list;
-	/** the key (<station>,<data>) of the record */
+	/** the key (station,date) of the record */
 	String key;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent 
 	 * constructor and then calling the clear method()
+	 * 
+	 * @param numFiles the number of files to be merged
 	 */
 	public WeatherRecord(int numFiles) {
 		super(numFiles);
