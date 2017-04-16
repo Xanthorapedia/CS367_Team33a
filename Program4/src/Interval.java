@@ -31,11 +31,13 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 
 	/** start and end of the interval */
 	T start, end;
+	
 	/** the label of the interval */
 	String label;
 
 	/**
 	 * Constructs a Interval instance with the given start, end and label.
+	 * IllegalArgumentException will be thrown if start.compareTo(end) > 0.
 	 * 
 	 * @param start
 	 *            the start of the interval
@@ -45,6 +47,9 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 	 *            the label of the interval
 	 */
 	public Interval(T start, T end, String label) {
+		if (start.compareTo(end) > 0)
+			throw new IllegalArgumentException();
+		
 		this.start = start;
 		this.end = end;
 		this.label = label;

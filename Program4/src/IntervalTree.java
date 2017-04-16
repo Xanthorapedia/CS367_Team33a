@@ -1,17 +1,30 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T> {
 
-
+	/** the root node of this tree*/
 	private IntervalNode<T> root;
 
-
+	/**
+	 * Constructs a <code>IntervalTree</code> whose root is specified by the
+	 * argument.
+	 * @param root the root node of the tree
+	 */
+	public IntervalTree(IntervalNode<T> root) {
+		this.root = root;
+	}
+	
+	/**
+	 * Constructs a initially empty <code>IntervalTree</code>.
+	 */
+	public IntervalTree() {
+		root = null;
+	}
 
 	@Override
 	public IntervalNode<T> getRoot() {
 		return root;
-
 	}
 
 	@Override
@@ -23,9 +36,9 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 	}
 	
 	/**
-	 * 
-	 * @param node
-	 * @param interval
+	 * The helper method for inserting a new node into the tree.
+	 * @param node the root of the subtree to insert to
+	 * @param interval the interval to be inserted into the subtree
 	 * @return
 	 */
 	private IntervalNode<T> insertHelper(IntervalNode<T> node,
@@ -39,7 +52,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 		
 		// search left
 		if(interval.compareTo(node.getInterval()) < 0){
-			//search right subtree and update maxend
+			//search right subtree and update maxEnd
 			newnode = insertHelper(node.getLeftNode(), interval);
 			node.setLeftNode(newnode);
 		}
@@ -123,7 +136,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 	public List<IntervalADT<T>> findOverlapping(IntervalADT<T> interval) {
 		if (interval == null)
 			throw new IllegalArgumentException();
-		LinkedList<IntervalADT<T>> list = new LinkedList<IntervalADT<T>>();
+		ArrayList<IntervalADT<T>> list = new ArrayList<IntervalADT<T>>();
 		findOverlappingHelper(root, interval, list);
 		return list;
 	}
@@ -147,7 +160,7 @@ public class IntervalTree<T extends Comparable<T>> implements IntervalTreeADT<T>
 	public List<IntervalADT<T>> searchPoint(T point) {
 		if (point == null)
 			throw new IllegalArgumentException();
-		LinkedList<IntervalADT<T>> list = new LinkedList<IntervalADT<T>>();
+		ArrayList<IntervalADT<T>> list = new ArrayList<IntervalADT<T>>();
 		searchPointHelper(root, point, list);
 		return list;
 	}

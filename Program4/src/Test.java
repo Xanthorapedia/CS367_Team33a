@@ -4,7 +4,7 @@ public class Test {
 	private static int counter = 0;
 	public static void main(String[] args) {
 		tree = new IntervalTree<Integer>();
-		
+		t( new Test() {public String toString() {return null;}});
 		add(0, 2);
 		add(0, 30);
 		add(0, 20);
@@ -19,6 +19,8 @@ public class Test {
 		del(0, 40);
 		show();
 	}
+	
+	public static void t(Test T) {System.out.println(T);}
 	
 	public static void add(int s, int e, String l) {
 		IntervalADT<Integer> interval = new Interval<Integer>(s, e, l);
