@@ -79,7 +79,11 @@ public class Interval<T extends Comparable<T>> implements IntervalADT<T> {
 	@Override
 	public int compareTo(IntervalADT<T> other) {
 		int ds = start.compareTo(other.getStart());
-		return ds != 0 ? ds : end.compareTo(other.getEnd());
+		return ds == 0 ? end.compareTo(other.getEnd()) : ds;
 	}
 
+	@Override
+	public String toString() {
+		return label + " [" + start + ", " + end + "]";
+	}
 }

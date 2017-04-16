@@ -160,25 +160,25 @@ public interface IntervalTreeADT<T extends Comparable<T>> {
 	public List<IntervalADT<T>> findOverlapping(IntervalADT<T> interval);
 
 	/**
-	 * Search and return a list of all intervals containing a given point. 
-	 * This method may return an empty list. 
+	 * Find and return a list of all intervals that overlap with the given interval. 
 	 * 
-	 * <p>For example: if the intervals stored in the tree are:</p>
-	 * <pre>
-	 * p1 [5, 10]
-	 * p2 [2, 18]
-	 * p3 [12, 30]</pre>
+	 * <p>Tip: Define a helper method for the recursive call and call it with root, 
+	 * the interval, and an empty list.  Then, return the list that has been built.</p>
 	 * 
-	 * <p>and the input point is 16, it will return a list containing the intervals:</p>
-	 * <pre>
-	 * p2 [2, 18]
-	 * p3 [12, 30]</pre>
+	 * <pre>   private void findOverlappingHelper(IntervalNode node, IntervalADT interval, List<IntervalADT<T>> result)</pre>
 	 * 
-	 * @throws IllegalArgumentException if point is null
+	 * <p>Pseudo-code for such a recursive findingOverlappingHelper method.</p>
 	 * 
-	 * @param point
-	 *            input point to search for.
-	 * @return List of intervals containing the point.
+	 * <ol>
+	 * <li>if node is null, return</li>
+	 * <li>if node interval overlaps with the given input interval, add it to the result.</li>
+	 * <li>if left subtree's max is greater than or equal to the interval's start, call findOverlappingHelper in the left subtree.</li>
+	 * <li>if right subtree's max is greater than or equal to the interval's start, call call findOverlappingHelper in the rightSubtree.</li>
+	 * </ol>
+	 *  
+	 * @param interval the interval to search for overlapping
+	 * 
+	 * @return list of intervals that overlap with the input interval.
 	 */
 	public List<IntervalADT<T>> searchPoint(T point);
 

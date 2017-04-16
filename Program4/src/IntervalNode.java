@@ -12,13 +12,13 @@
  */
 
 public class IntervalNode<T extends Comparable<T>> {
-	// Interval stored in the node.
+	/** Interval stored in the node. */
 	private IntervalADT<T> interval;
 
-	// Each node stores the maxEnd of the interval in its subtree.
+	/** Each node stores the maxEnd of the interval in its subtree. */
 	private T maxEnd;
 
-	// LeftNode and RightNode.
+	/** LeftNode and RightNode. */
 	private IntervalNode<T> leftNode, rightNode;
 
 	/**
@@ -31,13 +31,11 @@ public class IntervalNode<T extends Comparable<T>> {
 	 *            the interval data member.
 	 */
 	public IntervalNode(IntervalADT<T> interval) {
-		
-		maxEnd  = interval.getEnd();
+
+		maxEnd = interval.getEnd();
 		leftNode = null;
 		rightNode = null;
 		this.interval = interval;
-		
-		
 	}
 
 	/**
@@ -47,22 +45,16 @@ public class IntervalNode<T extends Comparable<T>> {
 	 * @return in-order successor node
 	 */
 	public IntervalNode<T> getSuccessor() {
-		
+
 		if (rightNode == null)
 			return null;
-		return leftMostNode(rightNode);
+
+		IntervalNode<T> cur = rightNode;
+		while (cur.getLeftNode() != null)
+			cur = cur.getLeftNode();
+		return cur;
 	}
 
-	/*
-	 * helper method to find leftMostNode
-	 */
-    private IntervalNode<T> leftMostNode(IntervalNode<T> thisNode){
-    	//if there is no leftmost child, return its parent
-    	if(thisNode.getLeftNode() == null)
-    		return thisNode; 
-    	
-    	return leftMostNode(thisNode.getLeftNode());
-    }
 	/**
 	 * Returns the interval associated with the node.
 	 * 

@@ -31,11 +31,11 @@ public class IntervalTreeGUI<T extends Comparable<T>> {
 			/* test the gui */
 			IntervalADT<Integer> t = new Interval<Integer>(1, 2, "Test");
 			IntervalNode<Integer> root = new IntervalNode<Integer>(t);
-			root.setLeftNode(new IntervalNode<Integer>(t));
-			root.setRightNode(new IntervalNode<Integer>(t));
-			root.getLeftNode().setLeftNode(new IntervalNode<Integer>(t));
-			root.getLeftNode().setRightNode(new IntervalNode<Integer>(t));
-			root.getRightNode().setLeftNode(new IntervalNode<Integer>(t));
+			root.setLeftNode(new IntervalNode<Integer>(new Interval<Integer>(1, 2, "Test0")));
+			root.setRightNode(new IntervalNode<Integer>(new Interval<Integer>(1, 3, "Test1")));
+			root.getLeftNode().setLeftNode(new IntervalNode<Integer>(new Interval<Integer>(1, 4, "Test2")));
+			root.getLeftNode().setRightNode(new IntervalNode<Integer>(new Interval<Integer>(1, 5, "Test3")));
+			root.getRightNode().setLeftNode(new IntervalNode<Integer>(new Interval<Integer>(1, 6, "Test4")));
 
 			IntervalTreeGUI<Integer> window = new IntervalTreeGUI<Integer>(root);
 			window.frame.setVisible(true);
